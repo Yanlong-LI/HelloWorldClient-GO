@@ -1,7 +1,9 @@
 package main
 
-import "HelloWorld/io/network/service"
+import (
+	"HelloWorld/io/network"
+)
 
 func main() {
-	service.Start()
+	network.Server()
 }
