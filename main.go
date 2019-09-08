@@ -1,9 +1,12 @@
 package main
 
 import (
-	"HelloWorld/io/network"
+	"HelloWorld/io/network/handle"
+	"HelloWorld/io/network/socket"
+	"HelloWorldServer/controller"
 )
 
 func main() {
-	network.Server()
+	handle.Register(0x0001, controller.HelloWorld)
+	socket.Server()
 }
