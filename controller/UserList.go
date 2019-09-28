@@ -4,7 +4,7 @@ import (
 	"HelloWorld/io/network/packet"
 	"HelloWorld/io/network/route"
 	"HelloWorld/io/network/socket/connect"
-	"HelloWorldServer/data"
+	user2 "HelloWorldServer/data/user"
 	"fmt"
 )
 
@@ -13,10 +13,10 @@ func init() {
 }
 
 func GetUserList(list packet.GetUserList, conn *connect.Connector) {
-	user := data.GetUser(conn)
+	user := user2.GetUser(conn.ID)
 
 	var userList []string
-	for _, v := range data.GetUsers() {
+	for _, v := range user2.GetUsers() {
 		userList = append(userList, v.Name)
 	}
 
