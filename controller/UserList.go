@@ -1,10 +1,10 @@
 package controller
 
 import (
-	"HelloWorld/io/network/packet"
 	"HelloWorld/io/network/route"
 	"HelloWorld/io/network/socket/connect"
 	user2 "HelloWorldServer/data/user"
+	"HelloWorldServer/packet"
 	"fmt"
 )
 

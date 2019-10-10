@@ -1,9 +1,9 @@
 package controller
 
 import (
-	"HelloWorld/io/network/packet"
 	"HelloWorld/io/network/route"
-	"HelloWorld/io/network/websocket/connect"
+	"HelloWorld/io/network/socket/connect"
+	"HelloWorldServer/packet"
 	"fmt"
 )
 
@@ -20,5 +20,5 @@ func init() {
 }
 
 func HelloWorld(world packet.HelloWorld, connector *connect.Connector) {
-	fmt.Println(world)
+	fmt.Println("新链接", connector)
 }
