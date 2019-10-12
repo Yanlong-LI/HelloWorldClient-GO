@@ -18,7 +18,7 @@ func Login(test packet.Login, conn *connect.Connector) {
 
 	if test.Username != "" {
 		conn.Send(packet.Token{Token: "123456789123456789"})
-		user.Register(conn.ID, user.User{Name: test.Username, Time: time.Now()})
+		user.Register(user.User{Id: conn.ID, Name: test.Username, Time: time.Now()})
 		fmt.Println(test.Username, "登录成功")
 		user := packet.User{Nickname: test.Username, LoginTime: time.Now().Unix()}
 		connect.Broadcast(packet.NewUser{User: user})

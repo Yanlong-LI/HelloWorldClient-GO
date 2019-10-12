@@ -9,5 +9,4 @@ import (
 func main() {
 
 	socket.Server()
-	//websocket.Server()
 }
