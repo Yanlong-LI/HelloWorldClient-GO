@@ -33,8 +33,9 @@ var List = make(map[uint32]User)
 func Register(user User) {
 	addChan <- user
 }
-func GetUser(ID uint32) User {
-	return List[ID]
+func GetUser(ID uint32) (User, bool) {
+	user, ok := List[ID]
+	return user, ok
 }
 
 func GetUsers() map[uint32]User {

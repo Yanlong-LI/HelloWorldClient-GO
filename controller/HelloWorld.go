@@ -1,8 +1,8 @@
 package controller
 
 import (
+	"HelloWorld/io/network/connect"
 	"HelloWorld/io/network/route"
-	"HelloWorld/io/network/socket/connect"
 	"HelloWorldServer/packet"
 	"fmt"
 )
@@ -19,6 +19,6 @@ func init() {
 	route.Register(packet.HelloWorld{}, HelloWorld)
 }
 
-func HelloWorld(world packet.HelloWorld, connector *connect.Connector) {
-	fmt.Println("新链接", connector)
+func HelloWorld(connector connect.Connector) {
+	fmt.Println("新链接", connector.GetId())
 }

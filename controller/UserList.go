@@ -1,9 +1,9 @@
 package controller
 
 import (
+	"HelloWorld/io/network/connect"
 	"HelloWorld/io/network/route"
-	"HelloWorld/io/network/socket/connect"
-	user2 "HelloWorldServer/data/user"
+	"HelloWorldServer/data/user"
 	"HelloWorldServer/packet"
 	"fmt"
 )
@@ -12,14 +12,15 @@ func init() {
 	route.Register(packet.GetUserList{}, GetUserList)
 }
 
-func GetUserList(list packet.GetUserList, conn *connect.Connector) {
-	user := user2.GetUser(conn.ID)
+func GetUserList(list packet.GetUserList, conn connect.Connector) {
+	userInfo, ok := user.GetUser(conn.GetId())
+	if ok {
+		var userList []string
+		for _, v := range user.GetUsers() {
+			userList = append(userList, v.Name)
+		}
 
-	var userList []string
-	for _, v := range user2.GetUsers() {
-		userList = append(userList, v.Name)
+		fmt.Println(userInfo)
+		conn.Send(packet.UserList{List: userList})
 	}
-
-	fmt.Println(user)
-	conn.Send(packet.UserList{List: userList})
 }
