@@ -10,6 +10,6 @@ func init() {
 	route.Register(packet.Disconnect{}, Disconnect)
 }
 
-func Disconnect(ID uint32) {
+func Disconnect(ID uint64) {
 	fmt.Println("一个连接断开:", ID)
 }
