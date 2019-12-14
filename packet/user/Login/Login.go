@@ -39,10 +39,12 @@ type Success struct {
 	Token string
 }
 
+//失败
 type Fail struct {
 	trait.Fail
 }
 
+// 票据验证失败
 type TicketAuthFail struct {
 	Code    uint32
 	Message string

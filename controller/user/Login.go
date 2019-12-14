@@ -3,10 +3,12 @@ package user
 import (
 	"HelloWorld/io/network/connect"
 	"HelloWorld/io/network/route"
+	dataConn2 "HelloWorldServer/data/conn"
 	"HelloWorldServer/packet/user"
 	UserLogin "HelloWorldServer/packet/user/Login"
 	"crypto/rand"
 	"fmt"
+	"strconv"
 )
 
 func init() {
@@ -16,6 +18,8 @@ func init() {
 
 func Login(login UserLogin.ForEmail, conn connect.Connector) {
 	fmt.Printf("用户 %s 尝试登陆\n", login.Email)
+
+	dataConn2.SignUp(conn.GetId(), user.User{Id: strconv.Itoa(int(conn.GetId())), UserName: login.Email, Language: "zh-chs", Region: "China"})
 	b := make([]byte, 32)
 	_, _ = rand.Read(b)
 	token := fmt.Sprintf("%x", b)
@@ -24,5 +28,9 @@ func Login(login UserLogin.ForEmail, conn connect.Connector) {
 
 // 获取自身用户信息
 func GetUserInfo(info user.GetInfo, conn connect.Connector) {
-	conn.Send(user.User{Id: "123412312", UserName: "1231231", Language: "zh-hans", Region: "asia/china/jiangsu/nanjing"})
+	_user, err := dataConn2.Auth(conn.GetId())
+	if err != nil {
+		return
+	}
+	conn.Send(_user)
 }
