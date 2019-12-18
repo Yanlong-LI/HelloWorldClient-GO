@@ -3,7 +3,7 @@ package controller
 import (
 	"HelloWorld/io/network/connect"
 	"HelloWorld/io/network/route"
-	dataConn2 "HelloWorldServer/data/conn"
+	conn2 "HelloWorldServer/model/Login"
 	"HelloWorldServer/packet"
 	"HelloWorldServer/packet/gateway"
 	"HelloWorldServer/packet/trait"
@@ -16,12 +16,13 @@ func init() {
 
 	WhiteList[7001] = true
 	WhiteList[6001] = true
+	WhiteList[6007] = true
 }
 
 func Middleware(OpCode uint32, conn connect.Connector) bool {
 	if _, ok := WhiteList[OpCode]; !ok {
 		// 验证用户是否登陆
-		_, err := dataConn2.Auth(conn.GetId())
+		_, err := conn2.Auth(conn.GetId())
 		if err != nil {
 			conn.Send(gateway.AuthenticFail{Fail: trait.Fail{Code: 7015, Message: "当前未登陆"}})
 			return false

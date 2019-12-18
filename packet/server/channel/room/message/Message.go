@@ -7,6 +7,8 @@ import (
 
 func init() {
 	packet.Register(10001, SendTextMessage{})
+	packet.Register(10002, SendTextMessageSuccess{})
+	packet.Register(10003, SendTextMessageFail{})
 	packet.Register(10004, TextMessage{})
 }
 
@@ -15,10 +17,12 @@ type SendTextMessage struct {
 	ChannelId string
 	RoomId    string
 	Content   string
+	RandomStr string
 }
 
 type SendTextMessageSuccess struct {
 	trait.Success
+	TextMessage
 }
 type SendTextMessageFail struct {
 	trait.Fail

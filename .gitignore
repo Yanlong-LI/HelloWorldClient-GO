@@ -1,3 +1,6 @@
 /.idea
 # 编译目录
 bin/
+
+#vendor
+vendor

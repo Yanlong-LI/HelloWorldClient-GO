@@ -7,7 +7,7 @@ import (
 
 func init() {
 	packet.Register(6507, GetList{})
-	packet.Register(6508, GetList{})
+	packet.Register(6508, List{})
 	packet.Register(6509, GetListFail{})
 }
 

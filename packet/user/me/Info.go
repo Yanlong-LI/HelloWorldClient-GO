@@ -1,4 +1,4 @@
-package user
+package me
 
 import (
 	"HelloWorld/io/network/packet"
@@ -7,9 +7,9 @@ import (
 
 func init() {
 	packet.Register(6501, GetInfo{})
-	packet.Register(6502, User{})
+	packet.Register(6502, Info{})
 	packet.Register(6503, GetInfoFail{})
-	packet.Register(6004, Edit{})
+	packet.Register(6004, EditInfo{})
 	packet.Register(6005, EditSuccess{})
 	packet.Register(6006, EditFail{})
 }
@@ -19,7 +19,7 @@ func init() {
 type GetInfo struct {
 }
 
-type User struct {
+type Info struct {
 	Id       string //用户ID
 	UserName string //用户昵称
 	Avatar   string //用户头像
@@ -38,7 +38,7 @@ type GetInfoFail struct {
 
 //region 修改信息
 
-type Edit struct {
+type EditInfo struct {
 	UserName string
 	Avatar   string
 	Language string

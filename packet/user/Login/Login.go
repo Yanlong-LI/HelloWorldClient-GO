@@ -12,6 +12,9 @@ func init() {
 	packet.Register(6004, AuthTicket{})
 	packet.Register(6005, Fail{})
 	packet.Register(6006, TicketAuthFail{})
+	packet.Register(6007, Resuming{})
+	packet.Register(6008, ResumingSuccess{})
+	packet.Register(6009, ResumingFail{})
 }
 
 //登陆
@@ -48,4 +51,16 @@ type Fail struct {
 type TicketAuthFail struct {
 	Code    uint32
 	Message string
+}
+
+type Resuming struct {
+	Token string
+}
+
+type ResumingSuccess struct {
+	trait.Success
+}
+
+type ResumingFail struct {
+	trait.Fail
 }
