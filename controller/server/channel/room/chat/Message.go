@@ -32,11 +32,5 @@ func TextMessage(msg message.SendTextMessage, conn connect.Connector) {
 
 	conn.Send(message.SendTextMessageSuccess{TextMessage: _msg})
 
-	if msg.ChannelId == "@me" {
-		//todo 单发给某个用户
-		//conn.Send(_msg)
-	} else {
-		//todo 群发给已加入群组的用户
-		conn.Broadcast(_msg, false)
-	}
+	conn.Broadcast(_msg, false)
 }
