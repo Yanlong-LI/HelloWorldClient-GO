@@ -27,7 +27,7 @@ func TextMessage(msg message.SendTextMessage, conn connect.Connector) {
 		Author: struct {
 			Id       string
 			Username string
-		}{Id: _user.Id, Username: _user.UserName},
+		}{Id: _user.Id, Username: _user.Nickname},
 	}
 
 	conn.Send(message.SendTextMessageSuccess{TextMessage: _msg})

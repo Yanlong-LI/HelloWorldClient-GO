@@ -21,7 +21,7 @@ type GetInfo struct {
 
 type Info struct {
 	Id       string //用户ID
-	UserName string //用户昵称
+	Nickname string //用户昵称
 	Avatar   string //用户头像
 	//Email       string
 	//EmailVerify bool
@@ -39,7 +39,7 @@ type GetInfoFail struct {
 //region 修改信息
 
 type EditInfo struct {
-	UserName string
+	Nickname string
 	Avatar   string
 	Language string
 	Region   string

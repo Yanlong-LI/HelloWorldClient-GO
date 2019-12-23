@@ -17,7 +17,7 @@ type GetInfo struct {
 
 type Info struct {
 	Id       string
-	UserName string
+	Nickname string
 	Avatar   string
 	Language string
 	Region   string

@@ -8,11 +8,11 @@ func init() {
 }
 
 type Get struct {
-	Id uint64
+	Id string
 }
 
 type Info struct {
-	Id         uint64
+	Id         string
 	Name       string
 	Icon       string
 	CreateUser string
