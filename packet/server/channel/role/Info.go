@@ -5,6 +5,6 @@ type Info struct {
 	// 角色名称
 	Name string
 	// 创建人openid
-	CreateUser string
-	CreateTime uint64
+	CreateUserId uint64
+	CreateTime   uint64
 }

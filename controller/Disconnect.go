@@ -2,7 +2,7 @@ package controller
 
 import (
 	"HelloWorld/io/network/route"
-	"HelloWorldServer/model/Login"
+	"HelloWorldServer/model/online"
 	"HelloWorldServer/packet"
 	"fmt"
 )
@@ -13,5 +13,5 @@ func init() {
 
 func Disconnect(ID uint64) {
 	fmt.Println("一个连接断开:", ID)
-	Login.SignOut(ID)
+	online.SignOut(ID)
 }

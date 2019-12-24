@@ -15,7 +15,7 @@ func actionGetChannelList(_ channel.GetList, conn connect.Connector) {
 
 	list := channel.List{}
 	info := channel.Info{
-		Id:         "1",
+		Id:         1,
 		Name:       "内测一",
 		Verify:     true,
 		CreateUser: "",
@@ -27,7 +27,7 @@ func actionGetChannelList(_ channel.GetList, conn connect.Connector) {
 
 	for i := 2; i < 6; i++ {
 		_channelInfo := channel.Info{
-			Id:         strconv.Itoa(i),
+			Id:         uint64(i),
 			Name:       "内测频道" + strconv.Itoa(i),
 			Verify:     true,
 			CreateUser: "0",

@@ -12,15 +12,16 @@ func init() {
 }
 
 type GetInfo struct {
-	Id string
+	Id uint64
 }
 
 type Info struct {
-	Id       string
+	Id       uint64
 	Nickname string
 	Avatar   string
 	Language string
 	Region   string
+	Remarks  string
 }
 
 type GetInfoFail struct {

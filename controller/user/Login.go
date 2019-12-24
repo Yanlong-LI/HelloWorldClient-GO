@@ -5,13 +5,12 @@ import (
 	"HelloWorld/io/network/connect"
 	"HelloWorld/io/network/route"
 	"HelloWorldServer/model"
-	conn2 "HelloWorldServer/model/Login"
+	conn2 "HelloWorldServer/model/online"
 	"HelloWorldServer/packet/trait"
 	UserLogin "HelloWorldServer/packet/user/Login"
 	"HelloWorldServer/packet/user/me"
 	"crypto/rand"
 	"fmt"
-	"strconv"
 )
 
 func init() {
@@ -35,14 +34,14 @@ func Login(login UserLogin.ForEmail, conn connect.Connector) {
 		conn.Send(UserLogin.Fail{Fail: trait.Fail{Message: "账户或密码不正确", Code: 6005}})
 		return
 	}
-	user := &model.User{}
-	err = db.Find(user).Where(map[interface{}]interface{}{"id": userAccount.UserId}).One()
+
+	user, err := model.GetUserById(userAccount.UserId)
 	if err != nil {
 		conn.Send(UserLogin.Fail{Fail: trait.Fail{Message: "账户或密码不正确", Code: 6005}})
 		return
 	}
 
-	conn2.SignIn(conn.GetId(), me.Info{Id: strconv.FormatUint(user.Id, 10), Nickname: user.Nickname, Language: "zh-chs", Region: "China"})
+	conn2.SignIn(conn, me.Info{Id: user.Id, Nickname: user.Nickname, Avatar: user.Avatar, Language: user.Language, Region: user.Region})
 	b := make([]byte, 32)
 	_, _ = rand.Read(b)
 	token := fmt.Sprintf("%x", b)
@@ -61,6 +60,12 @@ func GetUserInfo(info me.GetInfo, conn connect.Connector) {
 // 恢复登陆
 func actionResuming(resuming UserLogin.Resuming, conn connect.Connector) {
 	fmt.Printf("用户恢复登陆%s", resuming.Token)
-	conn2.SignIn(conn.GetId(), me.Info{Id: strconv.Itoa(int(conn.GetId())), Nickname: "未可知", Language: "zh-chs", Region: "China"})
+	_user, err := model.GetUserByToken(resuming.Token)
+	if err != nil {
+		fmt.Println(err)
+		conn.Send(UserLogin.ResumingFail{Fail: trait.Fail{Message: "Token无效"}})
+		return
+	}
+	conn2.SignIn(conn, me.Info{Id: _user.Id, Nickname: _user.Nickname, Language: _user.Language, Region: _user.Region})
 	conn.Send(UserLogin.ResumingSuccess{})
 }

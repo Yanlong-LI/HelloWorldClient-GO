@@ -12,7 +12,7 @@ type Get struct {
 }
 
 type Info struct {
-	Id         string
+	Id         uint64
 	Name       string
 	Icon       string
 	CreateUser string

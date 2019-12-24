@@ -13,11 +13,10 @@ func init() {
 }
 
 type SendTextMessage struct {
-	ServerId  string
-	ChannelId string
-	RoomId    string
-	Content   string
-	RandomStr string
+	ServerId     uint64
+	ChannelId    uint64
+	Content      string
+	RandomString string
 }
 
 type SendTextMessageSuccess struct {
@@ -30,10 +29,10 @@ type SendTextMessageFail struct {
 
 type TextMessage struct {
 	SendTextMessage
-	Id     string
+	Id     uint64
 	Time   uint64
 	Author struct {
-		Id       string
-		Username string
+		Id       uint64
+		Nickname string
 	}
 }

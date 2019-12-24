@@ -1,7 +1,7 @@
 package server
 
 type Info struct {
-	Id string
+	Id uint64
 	// 服务器名称
 	Name string
 	// 服务器版本

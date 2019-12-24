@@ -3,7 +3,7 @@ package controller
 import (
 	"HelloWorld/io/network/connect"
 	"HelloWorld/io/network/route"
-	conn2 "HelloWorldServer/model/Login"
+	conn2 "HelloWorldServer/model/online"
 	"HelloWorldServer/packet"
 	"HelloWorldServer/packet/gateway"
 	"HelloWorldServer/packet/trait"

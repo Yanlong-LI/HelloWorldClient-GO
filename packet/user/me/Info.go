@@ -20,7 +20,7 @@ type GetInfo struct {
 }
 
 type Info struct {
-	Id       string //用户ID
+	Id       uint64 //用户ID
 	Nickname string //用户昵称
 	Avatar   string //用户头像
 	//Email       string

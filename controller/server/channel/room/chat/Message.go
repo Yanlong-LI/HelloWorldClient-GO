@@ -3,7 +3,7 @@ package chat
 import (
 	"HelloWorld/io/network/connect"
 	"HelloWorld/io/network/route"
-	conn2 "HelloWorldServer/model/Login"
+	conn2 "HelloWorldServer/model/online"
 	"HelloWorldServer/packet/server/channel/room/message"
 	"log"
 	"time"
@@ -25,9 +25,9 @@ func TextMessage(msg message.SendTextMessage, conn connect.Connector) {
 		SendTextMessage: msg,
 		Time:            uint64(time.Now().Unix()),
 		Author: struct {
-			Id       string
-			Username string
-		}{Id: _user.Id, Username: _user.Nickname},
+			Id       uint64
+			Nickname string
+		}{Id: _user.Id, Nickname: _user.Nickname},
 	}
 
 	conn.Send(message.SendTextMessageSuccess{TextMessage: _msg})

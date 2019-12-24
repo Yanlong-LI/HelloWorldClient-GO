@@ -7,7 +7,7 @@ import "HelloWorldServer/packet/trait"
 // 一、 snsapi_base 仅获取 openid 不弹授权
 // 二、 snsapi_userinfo  给用户提示授权页 获取所有公开资料
 type GetAuthorize struct {
-	ServerId string
+	ServerId uint64
 	Scope    string
 }
 
@@ -26,7 +26,7 @@ type GetAuthorizeSuccess struct {
 }
 
 type GetAccessToken struct {
-	ServerId         string
+	ServerId         uint64
 	Secret           string
 	AuthorizeToken   string
 	IdentificationId string
