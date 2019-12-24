@@ -15,8 +15,14 @@ type Info struct {
 	Id         uint64
 	Name       string
 	Icon       string
-	CreateUser string
-	OwnerUser  string // 实际掌控着
+	CreateUser struct {
+		Id       uint64
+		Nickname string
+	}
+	OwnerUser struct {
+		Id       uint64
+		Nickname string
+	} // 实际掌控着
 	CreateTime uint64
 	Public     bool //是否公开
 	Verify     bool // 是否经过验证
