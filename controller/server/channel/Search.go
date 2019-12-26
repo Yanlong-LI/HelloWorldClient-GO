@@ -14,7 +14,7 @@ func init() {
 
 func actionSearchChannelList(searchList channel.SearchChannelList, conn connect.Connector) {
 
-	_list := db.Find(&model.Channel{}).Where("like", "name", "%"+searchList.Name+"%").All()
+	_list := db.Model(&model.Channel{}).Where("like", "name", "%"+searchList.Name+"%").All()
 
 	list := channel.SearchChannelListSuccess{}
 	list.List = make([]channel.Info, 0)
@@ -38,7 +38,7 @@ func actionSearchChannelList(searchList channel.SearchChannelList, conn connect.
 				}{Id: ownerUser.Id, Nickname: ownerUser.Nickname},
 				CreateTime: _cha.CreateTime,
 				Public:     true,
-				Icon:       _cha.Icon,
+				Avatar:     _cha.Avatar,
 			}
 			list.List = append(list.List, info)
 		}

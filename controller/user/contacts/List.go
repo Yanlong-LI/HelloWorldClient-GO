@@ -18,7 +18,7 @@ func actionGetList(list contacts.GetList, conn connect.Connector) {
 	_list.List = make([]contacts.Info, 0)
 	selfUser, _ := conn2.Auth(conn.GetId())
 
-	userContacts := db.Find(&model.UserContact{}).Where("=", "user_id", selfUser.Id).All()
+	userContacts := db.Model(&model.UserContact{}).Where("=", "user_id", selfUser.Id).All()
 
 	for _, contact := range userContacts {
 		if _contact, ok := contact.(model.UserContact); ok {

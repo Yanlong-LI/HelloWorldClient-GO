@@ -20,12 +20,12 @@ func actionSendTextMessage(sendTextMessage message.SendTextMessage, conn connect
 	selfUser, _ := online.Auth(conn.GetId())
 	recvUserId := sendTextMessage.ContactId
 
-	uc := db.Find(&model.UserContact{}).Where("user_id", selfUser.Id).AndWhere("contact_id", recvUserId).Exists()
+	uc := db.Model(&model.UserContact{}).Where("user_id", selfUser.Id).AndWhere("contact_id", recvUserId).Exists()
 	if !uc {
 		conn.Send(message.SendMessageFail{Fail: trait.Fail{Message: "找不到该好友"}})
 		return
 	}
-	cu := db.Find(&model.UserContact{}).Where("user_id", recvUserId).AndWhere("contact_id", selfUser.Id).Exists()
+	cu := db.Model(&model.UserContact{}).Where("user_id", recvUserId).AndWhere("contact_id", selfUser.Id).Exists()
 	if !cu {
 		conn.Send(message.SendMessageFail{Fail: trait.Fail{Message: "您不是对方的好友"}})
 		return

@@ -33,7 +33,8 @@ func actionGetChannelList(_ channel.GetList, conn connect.Connector) {
 				}{Id: ownerUser.Id, Nickname: ownerUser.Nickname},
 				CreateTime: _cha.CreateTime,
 				Public:     true,
-				Icon:       _cha.Icon,
+				Avatar:     _cha.Avatar,
+				Describe:   _cha.Describe,
 			}
 			ChannelChildrenS := _cha.GetChildren()
 			for _, channelChildren := range ChannelChildrenS {
@@ -54,7 +55,8 @@ func actionGetChannelList(_ channel.GetList, conn connect.Connector) {
 						}{Id: _ownerUser.Id, Nickname: _ownerUser.Nickname},
 						CreateTime: _channelChildren.CreateTime,
 						Public:     true,
-						Icon:       _channelChildren.Icon,
+						Avatar:     _channelChildren.Avatar,
+						Describe:   _channelChildren.Describe,
 					}
 					info.Channels = append(info.Channels, _channelInfo)
 				}

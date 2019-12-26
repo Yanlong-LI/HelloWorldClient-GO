@@ -17,6 +17,8 @@ func init() {
 	WhiteList[7001] = true
 	WhiteList[6001] = true
 	WhiteList[6007] = true
+	WhiteList[6010] = true
+	WhiteList[6013] = true
 }
 
 func Middleware(OpCode uint32, conn connect.Connector) bool {

@@ -14,7 +14,7 @@ type Get struct {
 type Info struct {
 	Id         uint64
 	Name       string
-	Icon       string
+	Avatar     string
 	CreateUser struct {
 		Id       uint64
 		Nickname string
@@ -28,4 +28,5 @@ type Info struct {
 	Verify     bool // 是否经过验证
 	Commerce   bool // 是否可商业
 	Channels   []Info
+	Describe   string
 }

@@ -6,6 +6,7 @@ type UserContact struct {
 	ContactId  uint64
 	Remarks    string
 	CreateTime uint64
+	UpdateTime uint64
 }
 
 func (uc *UserContact) GetUserInfo() (User, error) {

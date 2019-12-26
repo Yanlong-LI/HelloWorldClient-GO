@@ -8,6 +8,7 @@ type UserToken struct {
 	Token      string
 	ExpireTime uint64
 	CreateTime uint64
+	UpdateTime uint64
 }
 
 func (ut *UserToken) User() (User, error) {
@@ -16,7 +17,7 @@ func (ut *UserToken) User() (User, error) {
 
 func GetUserByToken(Token string) (User, error) {
 	var userToken = UserToken{}
-	err := db.Find(&userToken).Where("token", Token).One()
+	err := db.Model(&userToken).Where("token", Token).One()
 	if err != nil {
 		return User{}, err
 	}
