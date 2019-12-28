@@ -7,4 +7,6 @@ import (
 	_ "HelloWorldServer/packet/server"
 	// 用户
 	_ "HelloWorldServer/packet/user"
+	// 语音
+	_ "HelloWorldServer/packet/voice"
 )
