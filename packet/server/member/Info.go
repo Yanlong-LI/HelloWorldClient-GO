@@ -1,6 +1,6 @@
 package member
 
-import "HelloWorldServer/packet/server/role"
+import "github.com/yanlong-li/HelloWorldServer/packet/server/role"
 
 // 想给某个用户设置某种角色，当然需要明确给谁设定了
 type Info struct {

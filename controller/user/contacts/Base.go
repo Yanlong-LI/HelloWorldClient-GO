@@ -1,5 +1,5 @@
 package contacts
 
 import (
-	_ "HelloWorldServer/controller/user/contacts/message"
+	_ "github.com/yanlong-li/HelloWorldServer/controller/user/contacts/message"
 )

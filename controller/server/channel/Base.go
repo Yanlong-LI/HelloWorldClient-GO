@@ -1,5 +1,5 @@
 package channel
 
 import (
-	_ "HelloWorldServer/controller/server/channel/room"
+	_ "github.com/yanlong-li/HelloWorldServer/controller/server/channel/room"
 )

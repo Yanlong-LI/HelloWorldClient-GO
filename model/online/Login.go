@@ -1,9 +1,9 @@
 package online
 
 import (
-	"HelloWorld/io/network/connect"
-	"HelloWorldServer/packet/user/me"
 	"errors"
+	"github.com/yanlong-li/HelloWorld-GO/io/network/connect"
+	"github.com/yanlong-li/HelloWorldServer/packet/user/me"
 )
 
 var conUser = make(map[uint64]me.Info, 1)

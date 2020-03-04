@@ -1,6 +1,6 @@
 package authorize
 
-import "HelloWorldServer/packet/trait"
+import "github.com/yanlong-li/HelloWorldServer/packet/trait"
 
 // 获取授权
 // scope 目前范围有 二 参考微信

@@ -1,12 +1,12 @@
 package controller
 
 import (
-	"HelloWorld/io/network/connect"
-	"HelloWorld/io/network/route"
-	conn2 "HelloWorldServer/model/online"
-	"HelloWorldServer/packet"
-	"HelloWorldServer/packet/gateway"
-	"HelloWorldServer/packet/trait"
+	"github.com/yanlong-li/HelloWorld-GO/io/network/connect"
+	"github.com/yanlong-li/HelloWorld-GO/io/network/route"
+	conn2 "github.com/yanlong-li/HelloWorldServer/model/online"
+	"github.com/yanlong-li/HelloWorldServer/packet"
+	"github.com/yanlong-li/HelloWorldServer/packet/gateway"
+	"github.com/yanlong-li/HelloWorldServer/packet/trait"
 )
 
 var WhiteList = make(map[uint32]bool, 1)

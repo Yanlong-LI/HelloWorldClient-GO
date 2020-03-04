@@ -1,7 +1,7 @@
 package channel
 
 import (
-	_ "HelloWorldServer/packet/server/channel/member"
-	_ "HelloWorldServer/packet/server/channel/role"
-	_ "HelloWorldServer/packet/server/channel/room"
+	_ "github.com/yanlong-li/HelloWorldServer/packet/server/channel/member"
+	_ "github.com/yanlong-li/HelloWorldServer/packet/server/channel/role"
+	_ "github.com/yanlong-li/HelloWorldServer/packet/server/channel/room"
 )

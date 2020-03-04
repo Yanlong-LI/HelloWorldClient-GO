@@ -1,13 +1,8 @@
 package model
 
 import (
-	"HelloWorld/io/db"
-	"github.com/astaxie/beego/orm"
+	"github.com/yanlong-li/HelloWorld-GO/io/db"
 )
-
-func init() {
-	orm.RegisterModel(&User{})
-}
 
 type User struct {
 	Id         uint64

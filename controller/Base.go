@@ -1,8 +1,8 @@
 package controller
 
 import (
-	_ "HelloWorldServer/controller/gateway"
-	_ "HelloWorldServer/controller/server"
-	_ "HelloWorldServer/controller/user"
-	_ "HelloWorldServer/controller/voice"
+	_ "github.com/yanlong-li/HelloWorldServer/controller/gateway"
+	_ "github.com/yanlong-li/HelloWorldServer/controller/server"
+	_ "github.com/yanlong-li/HelloWorldServer/controller/user"
+	_ "github.com/yanlong-li/HelloWorldServer/controller/voice"
 )

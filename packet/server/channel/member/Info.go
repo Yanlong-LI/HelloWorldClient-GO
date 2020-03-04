@@ -1,7 +1,7 @@
 package member
 
 import (
-	"HelloWorldServer/packet/server/channel/role"
+	"github.com/yanlong-li/HelloWorldServer/packet/server/channel/role"
 )
 
 type Info struct {

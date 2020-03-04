@@ -1,5 +1,5 @@
 package room
 
 import (
-	_ "HelloWorldServer/packet/server/channel/room/message"
+	_ "github.com/yanlong-li/HelloWorldServer/packet/server/channel/room/message"
 )

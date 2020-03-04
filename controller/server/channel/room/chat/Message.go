@@ -1,10 +1,10 @@
 package chat
 
 import (
-	"HelloWorld/io/network/connect"
-	"HelloWorld/io/network/route"
-	conn2 "HelloWorldServer/model/online"
-	"HelloWorldServer/packet/server/channel/room/message"
+	"github.com/yanlong-li/HelloWorld-GO/io/network/connect"
+	"github.com/yanlong-li/HelloWorld-GO/io/network/route"
+	conn2 "github.com/yanlong-li/HelloWorldServer/model/online"
+	"github.com/yanlong-li/HelloWorldServer/packet/server/channel/room/message"
 	"log"
 	"time"
 )

@@ -1,8 +1,8 @@
 package message
 
 import (
-	"HelloWorld/io/network/packet"
-	"HelloWorldServer/packet/trait"
+	"github.com/yanlong-li/HelloWorld-GO/io/network/packet"
+	"github.com/yanlong-li/HelloWorldServer/packet/trait"
 )
 
 func init() {

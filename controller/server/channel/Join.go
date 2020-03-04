@@ -1,10 +1,10 @@
 package channel
 
 import (
-	"HelloWorld/io/network/connect"
-	"HelloWorld/io/network/route"
-	"HelloWorldServer/packet/server/channel"
-	"HelloWorldServer/packet/trait"
+	"github.com/yanlong-li/HelloWorld-GO/io/network/connect"
+	"github.com/yanlong-li/HelloWorld-GO/io/network/route"
+	"github.com/yanlong-li/HelloWorldServer/packet/server/channel"
+	"github.com/yanlong-li/HelloWorldServer/packet/trait"
 )
 
 func init() {

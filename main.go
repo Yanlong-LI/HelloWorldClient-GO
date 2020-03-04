@@ -1,13 +1,13 @@
 package main
 
 import (
-	"HelloWorld/io/db"
-	"HelloWorld/io/network/socket"
-	"HelloWorld/io/network/websocket"
-	_ "HelloWorldServer/controller"
-	_ "HelloWorldServer/model"
-	_ "HelloWorldServer/packet"
 	_ "github.com/go-sql-driver/mysql" // import your used driver
+	"github.com/yanlong-li/HelloWorld-GO/io/db"
+	"github.com/yanlong-li/HelloWorld-GO/io/network/socket"
+	"github.com/yanlong-li/HelloWorld-GO/io/network/websocket"
+	_ "github.com/yanlong-li/HelloWorldServer/controller"
+	_ "github.com/yanlong-li/HelloWorldServer/model"
+	_ "github.com/yanlong-li/HelloWorldServer/packet"
 )
 
 func main() {

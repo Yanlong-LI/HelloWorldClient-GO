@@ -1,13 +1,13 @@
 package user
 
 import (
-	"HelloWorld/io/db"
-	"HelloWorld/io/network/connect"
-	"HelloWorld/io/network/route"
-	"HelloWorldServer/common"
-	"HelloWorldServer/model"
-	"HelloWorldServer/packet/trait"
-	"HelloWorldServer/packet/user/register"
+	"github.com/yanlong-li/HelloWorld-GO/io/db"
+	"github.com/yanlong-li/HelloWorld-GO/io/network/connect"
+	"github.com/yanlong-li/HelloWorld-GO/io/network/route"
+	"github.com/yanlong-li/HelloWorldServer/common"
+	"github.com/yanlong-li/HelloWorldServer/model"
+	"github.com/yanlong-li/HelloWorldServer/packet/trait"
+	"github.com/yanlong-li/HelloWorldServer/packet/user/register"
 	"strings"
 	"time"
 )

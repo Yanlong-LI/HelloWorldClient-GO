@@ -1,6 +1,6 @@
 package channel
 
-import "HelloWorld/io/network/packet"
+import "github.com/yanlong-li/HelloWorld-GO/io/network/packet"
 
 func init() {
 	packet.Register(9001, GetList{})

@@ -1,12 +1,12 @@
 package contacts
 
 import (
-	"HelloWorld/io/db"
-	"HelloWorld/io/network/connect"
-	"HelloWorld/io/network/route"
-	"HelloWorldServer/model"
-	conn2 "HelloWorldServer/model/online"
-	"HelloWorldServer/packet/user/contacts"
+	"github.com/yanlong-li/HelloWorld-GO/io/db"
+	"github.com/yanlong-li/HelloWorld-GO/io/network/connect"
+	"github.com/yanlong-li/HelloWorld-GO/io/network/route"
+	"github.com/yanlong-li/HelloWorldServer/model"
+	conn2 "github.com/yanlong-li/HelloWorldServer/model/online"
+	"github.com/yanlong-li/HelloWorldServer/packet/user/contacts"
 )
 
 func init() {

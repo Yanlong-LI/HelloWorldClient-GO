@@ -1,7 +1,7 @@
 package user
 
 import (
-	_ "HelloWorldServer/packet/user/Login"
-	_ "HelloWorldServer/packet/user/channel"
-	_ "HelloWorldServer/packet/user/contacts"
+	_ "github.com/yanlong-li/HelloWorldServer/packet/user/Login"
+	_ "github.com/yanlong-li/HelloWorldServer/packet/user/channel"
+	_ "github.com/yanlong-li/HelloWorldServer/packet/user/contacts"
 )

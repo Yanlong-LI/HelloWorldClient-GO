@@ -1,6 +1,6 @@
 package model
 
-import "HelloWorld/io/db"
+import "github.com/yanlong-li/HelloWorld-GO/io/db"
 
 type UserToken struct {
 	Id         uint64
