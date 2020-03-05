@@ -3,7 +3,7 @@ package gateway
 import (
 	"github.com/yanlong-li/HelloWorld-GO/io/network/connect"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/route"
-	"github.com/yanlong-li/HelloWorldServer/packet/gateway"
+	"github.com/yanlong-li/HelloWorldServer/packetModel/gateway"
 )
 
 func init() {

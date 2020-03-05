@@ -8,9 +8,9 @@ import (
 	"github.com/yanlong-li/HelloWorld-GO/io/network/route"
 	"github.com/yanlong-li/HelloWorldServer/model"
 	conn2 "github.com/yanlong-li/HelloWorldServer/model/online"
-	"github.com/yanlong-li/HelloWorldServer/packet/trait"
-	UserLogin "github.com/yanlong-li/HelloWorldServer/packet/user/Login"
-	"github.com/yanlong-li/HelloWorldServer/packet/user/me"
+	"github.com/yanlong-li/HelloWorldServer/packetModel/trait"
+	UserLogin "github.com/yanlong-li/HelloWorldServer/packetModel/user/Login"
+	"github.com/yanlong-li/HelloWorldServer/packetModel/user/me"
 	"strings"
 	"time"
 )

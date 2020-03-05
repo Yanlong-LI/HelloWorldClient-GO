@@ -3,7 +3,7 @@ package voice
 import (
 	"github.com/yanlong-li/HelloWorld-GO/io/network/connect"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/route"
-	"github.com/yanlong-li/HelloWorldServer/packet/voice"
+	"github.com/yanlong-li/HelloWorldServer/packetModel/voice"
 )
 
 func init() {

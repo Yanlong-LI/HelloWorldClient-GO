@@ -7,7 +7,7 @@ import (
 	"github.com/yanlong-li/HelloWorld-GO/io/network/websocket"
 	_ "github.com/yanlong-li/HelloWorldServer/controller"
 	_ "github.com/yanlong-li/HelloWorldServer/model"
-	_ "github.com/yanlong-li/HelloWorldServer/packet"
+	_ "github.com/yanlong-li/HelloWorldServer/packetModel"
 )
 
 func main() {

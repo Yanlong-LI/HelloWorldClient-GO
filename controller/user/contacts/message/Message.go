@@ -6,8 +6,8 @@ import (
 	"github.com/yanlong-li/HelloWorld-GO/io/network/route"
 	"github.com/yanlong-li/HelloWorldServer/model"
 	"github.com/yanlong-li/HelloWorldServer/model/online"
-	"github.com/yanlong-li/HelloWorldServer/packet/trait"
-	"github.com/yanlong-li/HelloWorldServer/packet/user/contacts/message"
+	"github.com/yanlong-li/HelloWorldServer/packetModel/trait"
+	"github.com/yanlong-li/HelloWorldServer/packetModel/user/contacts/message"
 	"time"
 )
 

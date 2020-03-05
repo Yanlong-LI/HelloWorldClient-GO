@@ -6,7 +6,7 @@ import (
 	"github.com/yanlong-li/HelloWorld-GO/io/network/route"
 	"github.com/yanlong-li/HelloWorldServer/model"
 	conn2 "github.com/yanlong-li/HelloWorldServer/model/online"
-	"github.com/yanlong-li/HelloWorldServer/packet/user/contacts"
+	"github.com/yanlong-li/HelloWorldServer/packetModel/user/contacts"
 )
 
 func init() {

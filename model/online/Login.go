@@ -3,7 +3,7 @@ package online
 import (
 	"errors"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/connect"
-	"github.com/yanlong-li/HelloWorldServer/packet/user/me"
+	"github.com/yanlong-li/HelloWorldServer/packetModel/user/me"
 )
 
 var conUser = make(map[uint64]me.Info, 1)
