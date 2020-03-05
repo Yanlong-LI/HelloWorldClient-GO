@@ -12,7 +12,7 @@ import (
 var WhiteList = make(map[uint32]bool, 1)
 
 func init() {
-	route.Register(packetModel.RecvPacketMiddleware{}, Middleware)
+	route.Register(packetModel.BeforeRecving{}, Middleware)
 
 	WhiteList[7001] = true
 	WhiteList[6001] = true

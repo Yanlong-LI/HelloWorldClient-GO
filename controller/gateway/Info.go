@@ -7,10 +7,10 @@ import (
 )
 
 func init() {
-	route.Register(gateway.Info{}, GetInfo)
+	route.Register(gateway.GetInfo{}, GetInfo)
 }
 
-func GetInfo(info gateway.Info, conn connect.Connector) {
+func GetInfo(info gateway.GetInfo, conn connect.Connector) {
 
 	conn.Send(gateway.Info{Name: "Master Service", Version: "1.0.0", Region: "China", CreateTime: 1575703496})
 }
