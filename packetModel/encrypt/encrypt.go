@@ -1,11 +1,11 @@
-package encryp
+package encrypt
 
 import "github.com/yanlong-li/HelloWorld-GO/io/network/packet"
 
 func init() {
-	packet.Register(7016, EncryptData{})
+	packet.Register(7016, BytesData{})
 }
 
-type EncryptData struct {
+type BytesData struct {
 	Data []byte
 }

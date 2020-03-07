@@ -13,4 +13,5 @@ func init() {
 func GetInfo(info gateway.GetInfo, conn connect.Connector) {
 
 	conn.Send(gateway.Info{Name: "Master Service", Version: "1.0.0", Region: "China", CreateTime: 1575703496})
+
 }

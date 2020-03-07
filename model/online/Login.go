@@ -6,7 +6,7 @@ import (
 	"github.com/yanlong-li/HelloWorldServer/packetModel/user/me"
 )
 
-var conUser = make(map[uint64]me.Info, 1)
+var conUser = make(map[uint64]me.Info, 0)
 var userCons = make(map[uint64]map[uint64]connect.Connector)
 
 var signInTask = make(chan struct {
