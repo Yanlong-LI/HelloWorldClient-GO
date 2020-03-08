@@ -3,15 +3,15 @@ package online
 import (
 	"errors"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/connect"
-	"github.com/yanlong-li/HelloWorldServer/packetModel/user/me"
+	"github.com/yanlong-li/HelloWorldServer/packetModel/user"
 )
 
-var conUser = make(map[uint64]me.Info, 0)
+var conUser = make(map[uint64]user.Info, 0)
 var userCons = make(map[uint64]map[uint64]connect.Connector)
 
 var signInTask = make(chan struct {
 	Conn connect.Connector
-	User me.Info
+	User user.Info
 })
 var signOutTask = make(chan uint64)
 
@@ -53,10 +53,10 @@ func init() {
 }
 
 // 登陆
-func SignIn(_conn connect.Connector, _user me.Info) {
+func SignIn(_conn connect.Connector, _user user.Info) {
 	signInTask <- struct {
 		Conn connect.Connector
-		User me.Info
+		User user.Info
 	}{
 		_conn, _user,
 	}
@@ -68,12 +68,12 @@ func SignOut(CID uint64) {
 }
 
 // 验证连接是否登陆用户
-func Auth(CId uint64) (me.Info, error) {
+func Auth(CId uint64) (user.Info, error) {
 
 	if _user, ok := conUser[CId]; ok {
 		return _user, nil
 	}
-	return me.Info{}, errors.New("验证未通过")
+	return user.Info{}, errors.New("验证未通过")
 }
 
 func UserSendMessage(UserId uint64, Model interface{}) {

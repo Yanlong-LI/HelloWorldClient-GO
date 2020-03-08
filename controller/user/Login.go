@@ -9,15 +9,15 @@ import (
 	"github.com/yanlong-li/HelloWorldServer/model"
 	conn2 "github.com/yanlong-li/HelloWorldServer/model/online"
 	"github.com/yanlong-li/HelloWorldServer/packetModel/trait"
+	"github.com/yanlong-li/HelloWorldServer/packetModel/user"
 	UserLogin "github.com/yanlong-li/HelloWorldServer/packetModel/user/Login"
-	"github.com/yanlong-li/HelloWorldServer/packetModel/user/me"
 	"strings"
 	"time"
 )
 
 func init() {
 	route.Register(UserLogin.ForEmail{}, Login)
-	route.Register(me.GetInfo{}, GetUserInfo)
+	route.Register(user.GetInfo{}, GetUserInfo)
 	route.Register(UserLogin.Resuming{}, actionResuming)
 }
 
@@ -44,17 +44,17 @@ func Login(login UserLogin.ForEmail, conn connect.Connector) {
 		return
 	}
 
-	user, err := model.GetUserById(userAccount.UserId)
+	_user, err := model.GetUserById(userAccount.UserId)
 	if err != nil {
 		conn.Send(UserLogin.Fail{Fail: trait.Fail{Message: "账户或密码不正确", Code: 6005}})
 		return
 	}
 
-	conn2.SignIn(conn, me.Info{Id: user.Id, Nickname: user.Nickname, Avatar: user.Avatar, Language: user.Language, Region: user.Region})
+	conn2.SignIn(conn, user.Info{Id: _user.Id, Nickname: _user.Nickname, Avatar: _user.Avatar, Language: _user.Language, Region: _user.Region})
 	b := make([]byte, 32)
 	_, _ = rand.Read(b)
 	token := fmt.Sprintf("%x", b)
-	userToken := &model.UserToken{UserId: user.Id, Token: token, ExpireTime: uint64(time.Now().AddDate(0, 1, 0).Unix()), CreateTime: uint64(time.Now().Unix())}
+	userToken := &model.UserToken{UserId: _user.Id, Token: token, ExpireTime: uint64(time.Now().AddDate(0, 1, 0).Unix()), CreateTime: uint64(time.Now().Unix())}
 	err = db.Model(userToken).Insert()
 	if err != nil {
 		fmt.Println(err)
@@ -63,7 +63,7 @@ func Login(login UserLogin.ForEmail, conn connect.Connector) {
 }
 
 // 获取自身用户信息
-func GetUserInfo(info me.GetInfo, conn connect.Connector) {
+func GetUserInfo(info user.GetInfo, conn connect.Connector) {
 	_user, err := conn2.Auth(conn.GetId())
 	if err != nil {
 		return
@@ -80,6 +80,6 @@ func actionResuming(resuming UserLogin.Resuming, conn connect.Connector) {
 		conn.Send(UserLogin.ResumingFail{Fail: trait.Fail{Message: "Token无效"}})
 		return
 	}
-	conn2.SignIn(conn, me.Info{Id: _user.Id, Nickname: _user.Nickname, Language: _user.Language, Region: _user.Region})
+	conn2.SignIn(conn, user.Info{Id: _user.Id, Nickname: _user.Nickname, Language: _user.Language, Region: _user.Region})
 	conn.Send(UserLogin.ResumingSuccess{})
 }

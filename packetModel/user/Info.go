@@ -1,4 +1,4 @@
-package me
+package user
 
 import (
 	"github.com/yanlong-li/HelloWorld-GO/io/network/packet"

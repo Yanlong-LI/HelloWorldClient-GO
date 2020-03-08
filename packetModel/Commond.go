@@ -3,10 +3,10 @@ package packetModel
 import "github.com/yanlong-li/HelloWorld-GO/io/network/packet"
 
 func init() {
-	packet.Register(packet.CONNECTION, Connected{})
-	packet.Register(packet.DISCONNECTION, Disconnect{})
-	packet.Register(packet.BEFORE_RECVING, BeforeRecving{})
-	packet.Register(packet.BEFORE_SENDING, BeforeSending{})
+	packet.Register(packet.Connection, Connected{})
+	packet.Register(packet.Disconnection, Disconnect{})
+	packet.Register(packet.BeforeRecv, BeforeRecving{})
+	packet.Register(packet.BeforeSending, BeforeSending{})
 }
 
 // 连接动作
