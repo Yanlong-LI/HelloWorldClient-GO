@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"fmt"
+	"github.com/yanlong-li/HelloWorld-GO/io/logger"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/connect"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/route"
 	"github.com/yanlong-li/HelloWorldServer/model/online"
@@ -13,6 +13,6 @@ func init() {
 }
 
 func Disconnect(conn connect.Connector) {
-	fmt.Println("一个连接断开:", conn.GetId())
+	logger.Debug("一个连接断开:", 0, conn.GetId())
 	online.SignOut(conn.GetId())
 }

@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"fmt"
+	"github.com/yanlong-li/HelloWorld-GO/io/logger"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/connect"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/route"
 	"github.com/yanlong-li/HelloWorldServer/packetModel"
@@ -14,8 +14,7 @@ func init() {
 
 func Connected(conn connect.Connector) {
 
-	fmt.Println("新连接", conn.GetId())
-
-	conn.Send(gateway.Info{Name: "Master Service", Version: "1.0.0", Region: "China", CreateTime: 1575703496})
+	logger.Debug("新连接", 0, conn.GetId())
+	_ = conn.Send(gateway.Info{Name: "Master Service", Version: "1.0.0", Region: "China", CreateTime: 1575703496})
 	//conn.Send(gateway.GetHeartbeat{})
 }

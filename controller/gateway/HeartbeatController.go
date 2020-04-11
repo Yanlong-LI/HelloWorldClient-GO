@@ -1,10 +1,11 @@
 package gateway
 
 import (
+	"fmt"
+	"github.com/yanlong-li/HelloWorld-GO/io/logger"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/connect"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/route"
 	"github.com/yanlong-li/HelloWorldServer/packetModel/gateway"
-	"github.com/yanlong-li/HelloWorldServer/packetModel/user"
 )
 
 func init() {
@@ -12,7 +13,6 @@ func init() {
 }
 
 func Heartbeat(heartbeat gateway.Heartbeat, conn connect.Connector) {
-
-	conn.Send(gateway.Heartbeat{Sn: heartbeat.Sn + 1})
-	conn.Broadcast(user.Info{Id: conn.GetId(), Nickname: "test"}, true)
+	logger.Debug(fmt.Sprintf("收到 {%d} 心跳包 {%d}", conn.GetId(), heartbeat.Sn), 0, heartbeat)
+	_ = conn.Send(gateway.Heartbeat{Sn: heartbeat.Sn + 1})
 }

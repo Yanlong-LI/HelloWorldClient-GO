@@ -53,14 +53,17 @@ type TicketAuthFail struct {
 	Message string
 }
 
+// 恢复数据包
 type Resuming struct {
 	Token string
 }
 
+//恢复成功
 type ResumingSuccess struct {
 	trait.Success
 }
 
+//恢复失败
 type ResumingFail struct {
 	trait.Fail
 }
