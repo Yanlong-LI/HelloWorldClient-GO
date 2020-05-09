@@ -22,7 +22,7 @@ func init() {
 
 	packet.Register(6537, UnBlackContact{}, UnBlackContactSuccess{}, UnBlackContactFail{})
 
-	packet.Register(6543, AcceptedContact{}, RejectedContactSuccess{}, RequestAddContact{})
+	packet.Register(6543, AcceptedContact{}, RejectedContact{}, RequestAddContact{})
 
 }
 
@@ -66,7 +66,8 @@ type AcceptContactFail struct {
 
 //拒绝
 type RefuseContact struct {
-	Id uint64
+	Id     uint64
+	Remark string
 }
 type RefuseContactSuccess struct {
 	trait.Success
@@ -115,7 +116,7 @@ type AcceptedContact struct {
 }
 
 // 被拒绝
-type RejectedContactSuccess struct {
+type RejectedContact struct {
 	Id     uint64 // 谁拒绝的发送谁的id
 	Remark string // 拒绝理由
 }

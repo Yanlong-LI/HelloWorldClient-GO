@@ -19,3 +19,7 @@ func GetUserById(Id uint64) (User, db.OrmError) {
 	err := db.Model(&_user).Find().Where("=", "id", Id).One()
 	return _user, err
 }
+
+func (user User) UserContactAddUser(userId uint64) {
+	UserContactAddUser(user.Id, userId)
+}
