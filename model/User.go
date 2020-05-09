@@ -14,8 +14,8 @@ type User struct {
 	UpdateTime uint64
 }
 
-func GetUserById(Id uint64) (User, error) {
+func GetUserById(Id uint64) (User, db.OrmError) {
 	var _user User
-	err := db.Model(&_user).Where(map[interface{}]interface{}{"id": Id}).One()
+	err := db.Model(&_user).Find().Where("=", "id", Id).One()
 	return _user, err
 }

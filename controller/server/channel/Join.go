@@ -13,5 +13,5 @@ func init() {
 
 func actionInvitationLinkJoin(link channel.InvitationLinkJoin, conn connect.Connector) {
 
-	conn.Send(channel.InvitationLinkJoinFail{Fail: trait.Fail{Message: "邀请链接功能暂未开放"}})
+	_ = conn.Send(channel.InvitationLinkJoinFail{Fail: trait.Fail{Message: "邀请链接功能暂未开放"}})
 }

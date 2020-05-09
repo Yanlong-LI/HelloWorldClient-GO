@@ -4,8 +4,8 @@ import "github.com/yanlong-li/HelloWorldServer/packetModel/trait"
 
 // 获取授权
 // scope 目前范围有 二 参考微信
-// 一、 snsapi_base 仅获取 openid 不弹授权
-// 二、 snsapi_userinfo  给用户提示授权页 获取所有公开资料
+// 一、 sns_api_base 仅获取 openid 不弹授权
+// 二、 sns_api_user_info  给用户提示授权页 获取所有公开资料
 type GetAuthorize struct {
 	ServerId uint64
 	Scope    string

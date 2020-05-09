@@ -67,5 +67,5 @@ func actionGetChannelList(_ channel.GetList, conn connect.Connector) {
 		}
 	}
 
-	conn.Send(list)
+	_ = conn.Send(list)
 }

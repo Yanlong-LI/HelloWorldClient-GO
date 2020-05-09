@@ -9,7 +9,7 @@ import (
 
 func main() {
 
-	db.ConfigDb("mysql", "root:339d2cab665a696a@tcp(127.0.0.1:3306)/hello_world?charset=utf8")
+	db.ConfigDb("mysql", "helloworld:helloworld@tcp(localhost:3306)/helloworld?charset=utf8")
 
 	//go websocket.Server(":3001")
 	socket.Server(":3000")

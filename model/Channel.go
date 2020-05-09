@@ -18,9 +18,9 @@ type Channel struct {
 }
 
 func GetChannels() []interface{} {
-	return db.Model(&Channel{}).Where("parent_id", 0).All()
+	return db.Model(&Channel{}).Find().Where("parent_id", 0).All()
 }
 
 func (cha *Channel) GetChildren() []interface{} {
-	return db.Model(&Channel{}).Where("parent_id", cha.Id).All()
+	return db.Model(&Channel{}).Find().Where("parent_id", cha.Id).All()
 }

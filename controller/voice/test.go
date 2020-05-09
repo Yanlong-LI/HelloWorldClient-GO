@@ -11,5 +11,5 @@ func init() {
 }
 
 func actionTestVoice(_vc voice.T11001, conn connect.Connector) {
-	conn.Send(voice.T11004{T11001: _vc})
+	_ = conn.Send(voice.T11004{T11001: _vc})
 }

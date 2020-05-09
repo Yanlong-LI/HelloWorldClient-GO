@@ -6,7 +6,10 @@ import (
 	"github.com/yanlong-li/HelloWorldServer/packetModel/user"
 )
 
-var conUser = make(map[uint64]user.Info, 0)
+// 连接id->User
+var conUser = make(map[uint64]user.Info)
+
+// userId -> [连接ID]->连接器
 var userCons = make(map[uint64]map[uint64]connect.Connector)
 
 var signInTask = make(chan struct {
@@ -40,7 +43,7 @@ func init() {
 				if _userCons, ok := userCons[sendMessage.UserId]; ok {
 
 					for _, conn := range _userCons {
-						conn.Send(sendMessage.Model)
+						_ = conn.Send(sendMessage.Model)
 					}
 
 				}

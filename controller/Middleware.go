@@ -1,6 +1,8 @@
 package controller
 
 import (
+	"fmt"
+	"github.com/yanlong-li/HelloWorld-GO/io/logger"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/connect"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/route"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/stream"
@@ -15,7 +17,7 @@ var routingWhiteList = make(map[uint32]bool, 0)
 
 // 这里实现的是 账户登录白名单，可以自由定义其他类型检查
 func init() {
-	route.Register(packetModel.BeforeRecving{}, Middleware)
+	route.Register(packetModel.BeforeReceiving{}, Middleware)
 
 	routingWhiteList[7001] = true // 心跳
 	routingWhiteList[7002] = true // 获取心跳
@@ -32,6 +34,7 @@ func Middleware(ps stream.Interface, conn connect.Connector) bool {
 		// 验证用户是否登陆
 		_, err := conn2.Auth(conn.GetId())
 		if err != nil {
+			logger.Debug(fmt.Sprintf("拦截一个请求:%d", ps.GetOpCode()), 0)
 			_ = conn.Send(gateway.AuthenticFail{Fail: trait.Fail{Code: 7015, Message: "当前未登陆"}})
 			return false
 		}

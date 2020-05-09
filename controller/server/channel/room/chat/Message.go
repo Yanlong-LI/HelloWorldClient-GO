@@ -30,7 +30,7 @@ func TextMessage(msg message.SendTextMessage, conn connect.Connector) {
 		}{Id: _user.Id, Nickname: _user.Nickname},
 	}
 
-	conn.Send(message.SendTextMessageSuccess{TextMessage: _msg})
+	_ = conn.Send(message.SendTextMessageSuccess{TextMessage: _msg})
 
 	conn.Broadcast(_msg, false)
 }
