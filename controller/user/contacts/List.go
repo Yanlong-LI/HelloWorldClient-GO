@@ -20,7 +20,7 @@ func actionGetList(list contacts.GetList, conn connect.Connector) {
 	_list.List = make([]contacts.Info, 0)
 	selfUser, _ := conn2.Auth(conn.GetId())
 
-	userContacts := db.Model(&model.UserContact{}).Find().Where("=", "user_id", selfUser.Id).AndWhere("=", "status", 1).All()
+	userContacts := db.Model(&model.UserContact{}).Find().Where("=", "user_id", selfUser.Id).All()
 
 	for _, contact := range userContacts {
 		if _contact, ok := contact.(model.UserContact); ok {
@@ -48,7 +48,7 @@ func actionGetRequestList(list contacts.GetList, conn connect.Connector) {
 	_list.List = make([]contacts.Info, 0)
 	selfUser, _ := conn2.Auth(conn.GetId())
 
-	userContacts := db.Model(&model.UserContact{}).Find().Where("=", "user_id", selfUser.Id).AndWhere("&", "status", 8).All()
+	userContacts := db.Model(&model.UserContact{}).Find().Where("=", "user_id", selfUser.Id).All()
 
 	for _, contact := range userContacts {
 		if _contact, ok := contact.(model.UserContact); ok {
@@ -76,7 +76,7 @@ func actionGetBlackList(list contacts.GetList, conn connect.Connector) {
 	_list.List = make([]contacts.Info, 0)
 	selfUser, _ := conn2.Auth(conn.GetId())
 
-	userContacts := db.Model(&model.UserContact{}).Find().Where("=", "user_id", selfUser.Id).AndWhere("&", "status", 2).All()
+	userContacts := db.Model(&model.UserContact{}).Find().Where("=", "user_id", selfUser.Id).All()
 
 	for _, contact := range userContacts {
 		if _contact, ok := contact.(model.UserContact); ok {

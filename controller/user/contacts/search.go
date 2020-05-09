@@ -21,7 +21,7 @@ func searchUser(searchUser contacts.SearchUser, connector connect.Connector) {
 
 	_userModel := &model.User{}
 
-	err := db.Model(_userModel).Find().Where("=", "account", searchUser.Account).AndWhere("id", "!=", selfUser.Id).One()
+	err := db.Model(_userModel).Find().Where("=", "account", searchUser.Account).AndWhere("!=", "id", selfUser.Id).One()
 	if !err.Status() || err.Empty() {
 		_ = connector.Send(contacts.SearchUserFail{Fail: struct {
 			Code    uint32
