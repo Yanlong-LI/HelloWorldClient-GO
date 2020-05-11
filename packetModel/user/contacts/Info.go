@@ -21,7 +21,7 @@ type Info struct {
 	Avatar   string
 	Language string
 	Region   string
-	Remarks  string
+	Remark   string
 }
 
 type GetInfoFail struct {

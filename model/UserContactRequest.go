@@ -16,6 +16,14 @@ type UserContactRequest struct {
 	UpdateTime    uint64
 }
 
+func (uc *UserContactRequest) GetUserInfo() (User, db.OrmError) {
+	return GetUserById(uc.UserId)
+}
+
+func (uc *UserContactRequest) GetContactInfo() (User, db.OrmError) {
+	return GetUserById(uc.ContactId)
+}
+
 func UserContactRequestFind(userId, contactId uint64) (*UserContactRequest, db.OrmError) {
 
 	userContactRequest := &UserContactRequest{}

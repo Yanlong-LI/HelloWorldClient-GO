@@ -12,7 +12,7 @@ import (
 func init() {
 	route.Register(contacts.GetList{}, actionGetList)
 	route.Register(contacts.GetRequestList{}, actionGetRequestList)
-	route.Register(contacts.GetBlacklist{}, actionGetList)
+	route.Register(contacts.GetBlacklist{}, actionGetBlackList)
 }
 
 func actionGetList(list contacts.GetList, conn connect.Connector) {
@@ -32,7 +32,7 @@ func actionGetList(list contacts.GetList, conn connect.Connector) {
 					Avatar:   _contactInfo.Avatar,
 					Language: _contactInfo.Language,
 					Region:   _contactInfo.Region,
-					Remarks:  _contact.Remarks,
+					Remark:   _contact.Remark,
 				}
 				_list.List = append(_list.List, _contact)
 			}
@@ -48,10 +48,10 @@ func actionGetRequestList(list contacts.GetList, conn connect.Connector) {
 	_list.List = make([]contacts.Info, 0)
 	selfUser, _ := conn2.Auth(conn.GetId())
 
-	userContacts := db.Model(&model.UserContact{}).Find().Where("=", "user_id", selfUser.Id).All()
+	userContacts := db.Model(&model.UserContactRequest{}).Find().Where("=", "user_id", selfUser.Id).All()
 
 	for _, contact := range userContacts {
-		if _contact, ok := contact.(model.UserContact); ok {
+		if _contact, ok := contact.(model.UserContactRequest); ok {
 			_contactInfo, err := _contact.GetContactInfo()
 			if err.Empty() {
 				_contact := contacts.Info{
@@ -60,7 +60,7 @@ func actionGetRequestList(list contacts.GetList, conn connect.Connector) {
 					Avatar:   _contactInfo.Avatar,
 					Language: _contactInfo.Language,
 					Region:   _contactInfo.Region,
-					Remarks:  _contact.Remarks,
+					Remark:   _contact.UserRemark,
 				}
 				_list.List = append(_list.List, _contact)
 			}
@@ -76,19 +76,19 @@ func actionGetBlackList(list contacts.GetList, conn connect.Connector) {
 	_list.List = make([]contacts.Info, 0)
 	selfUser, _ := conn2.Auth(conn.GetId())
 
-	userContacts := db.Model(&model.UserContact{}).Find().Where("=", "user_id", selfUser.Id).All()
+	userContactBlacks := db.Model(&model.UserContactBlack{}).Find().Where("=", "user_id", selfUser.Id).All()
 
-	for _, contact := range userContacts {
-		if _contact, ok := contact.(model.UserContact); ok {
-			_contactInfo, err := _contact.GetContactInfo()
+	for _, userContactBlack := range userContactBlacks {
+		if contactBlack, ok := userContactBlack.(model.UserContactBlack); ok {
+			user, err := contactBlack.GetContactInfo()
 			if err.Empty() {
 				_contact := contacts.Info{
-					Id:       _contactInfo.Id,
-					Nickname: _contactInfo.Nickname,
-					Avatar:   _contactInfo.Avatar,
-					Language: _contactInfo.Language,
-					Region:   _contactInfo.Region,
-					Remarks:  _contact.Remarks,
+					Id:       user.Id,
+					Nickname: user.Nickname,
+					Avatar:   user.Avatar,
+					Language: user.Language,
+					Region:   user.Region,
+					Remark:   contactBlack.Remark,
 				}
 				_list.List = append(_list.List, _contact)
 			}

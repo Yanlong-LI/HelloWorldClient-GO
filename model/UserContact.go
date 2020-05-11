@@ -9,7 +9,7 @@ type UserContact struct {
 	Id         uint64
 	UserId     uint64
 	ContactId  uint64
-	Remarks    string
+	Remark     string
 	CreateTime uint64
 	UpdateTime uint64
 }

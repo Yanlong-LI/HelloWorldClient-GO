@@ -231,3 +231,11 @@ CREATE TABLE `users`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+-- 变更字段名称 2020年5月11日09:57:10
+ALTER TABLE `user_contacts`
+    CHANGE COLUMN `remarks` `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '备注';
+
+-- 黑名单表增加备注字段 2020年5月11日09:59:17
+ALTER TABLE `user_contact_black`
+    ADD COLUMN `remark` varchar(255) NOT NULL DEFAULT '' COMMENT '拉黑描述';
