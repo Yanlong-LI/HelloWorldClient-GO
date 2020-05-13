@@ -31,7 +31,7 @@ func actionSendTextMessage(sendTextMessage message.SendTextMessage, conn connect
 		return
 	}
 	// 先发给自己发送成功提示
-	_ = conn.Send(message.SendMessageSuccess{SendTextMessage: sendTextMessage, Id: 0, CreateTime: uint64(time.Now().Unix())})
+	_ = conn.Send(message.SendMessageSuccess{RandomString: sendTextMessage.RandomString, Id: 0, CreateTime: uint64(time.Now().Unix())})
 	//发送给好友
 	online.UserSendMessage(recvUserId, message.RecvTextMessage{CreateTime: uint64(time.Now().Unix()), Id: 0, ContactId: selfUser.Id, Content: sendTextMessage.Content})
 

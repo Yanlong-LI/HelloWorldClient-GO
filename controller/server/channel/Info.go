@@ -1,22 +1,21 @@
 package channel
 
 import (
+	"github.com/yanlong-li/HelloWorld-GO/io/db"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/connect"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/route"
 	"github.com/yanlong-li/HelloWorldServer/model"
 	"github.com/yanlong-li/HelloWorldServer/packetModel/server/channel"
+	"github.com/yanlong-li/HelloWorldServer/packetModel/trait"
 )
 
 func init() {
-	route.Register(channel.GetList{}, actionGetChannelList)
-}
-
-func actionGetChannelList(_ channel.GetList, conn connect.Connector) {
-
-	_list := model.GetChannels()
-	list := channel.List{}
-	for _, cha := range _list {
-		if _cha, ok := cha.(model.Channel); ok {
+	route.Register(channel.Get{}, func(info channel.Get, conn connect.Connector) {
+		_cha := &model.Channel{}
+		ormErr := db.Model(_cha).Find().Where("=", "id", info.Id).One()
+		if !ormErr.Status() {
+			_ = conn.Send(channel.GetFail{Fail: trait.Fail{Message: "数据不存在"}})
+		} else {
 			createUser, _ := model.GetUserById(_cha.CreateUserId)
 			ownerUser, _ := model.GetUserById(_cha.CreateUserId)
 			info := channel.Info{
@@ -65,9 +64,7 @@ func actionGetChannelList(_ channel.GetList, conn connect.Connector) {
 
 			}
 
-			list.List = append(list.List, info)
+			_ = conn.Send(info)
 		}
-	}
-
-	_ = conn.Send(list)
+	})
 }

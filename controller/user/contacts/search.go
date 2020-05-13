@@ -19,9 +19,9 @@ func searchUser(searchUser contacts.SearchUser, connector connect.Connector) {
 
 	selfUser, _ := online.Auth(connector.GetId())
 
-	_userModel := &model.User{}
+	_userAccountModel := &model.UserAccount{}
 
-	err := db.Model(_userModel).Find().Where("=", "account", searchUser.Account).AndWhere("!=", "id", selfUser.Id).One()
+	err := db.Model(_userAccountModel).Find().Where("=", "account", searchUser.Account).AndWhere("!=", "user_id", selfUser.Id).One()
 	if !err.Status() || err.Empty() {
 		_ = connector.Send(contacts.SearchUserFail{Fail: struct {
 			Code    uint32
@@ -29,7 +29,15 @@ func searchUser(searchUser contacts.SearchUser, connector connect.Connector) {
 		}{Code: uint32(1), Message: "未搜索到账户"}})
 		return
 	}
-	_userInfo := user.Info{Id: _userModel.Id, Nickname: _userModel.Nickname, Avatar: _userModel.Avatar, Region: _userModel.Region, Language: _userModel.Language}
+	_user, err := _userAccountModel.GetUser()
+	if !err.Status() || err.Empty() {
+		_ = connector.Send(contacts.SearchUserFail{Fail: struct {
+			Code    uint32
+			Message string
+		}{Code: uint32(1), Message: "搜索异常，用户数据丢失"}})
+		return
+	}
+	_userInfo := user.Info{Id: _user.Id, Nickname: _user.Nickname, Avatar: _user.Avatar, Region: _user.Region, Language: _user.Language}
 	_ = connector.Send(contacts.SearchUserSuccess{
 		Info: _userInfo,
 	})

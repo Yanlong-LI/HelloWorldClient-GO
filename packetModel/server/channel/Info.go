@@ -1,14 +1,16 @@
 package channel
 
-import "github.com/yanlong-li/HelloWorld-GO/io/network/packet"
+import (
+	"github.com/yanlong-li/HelloWorld-GO/io/network/packet"
+	"github.com/yanlong-li/HelloWorldServer/packetModel/trait"
+)
 
 func init() {
-	packet.Register(9010, Get{})
-	packet.Register(9011, Info{})
+	packet.Register(9010, Get{}, Info{}, GetFail{})
 }
 
 type Get struct {
-	Id string
+	Id uint64
 }
 
 type Info struct {
@@ -29,4 +31,8 @@ type Info struct {
 	Commerce   bool // 是否可商业
 	Channels   []Info
 	Describe   string
+}
+
+type GetFail struct {
+	trait.Fail
 }

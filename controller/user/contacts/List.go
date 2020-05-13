@@ -24,8 +24,8 @@ func actionGetList(list contacts.GetList, conn connect.Connector) {
 
 	for _, contact := range userContacts {
 		if _contact, ok := contact.(model.UserContact); ok {
-			_contactInfo, err := _contact.GetContactInfo()
-			if err.Empty() {
+			_contactInfo, err := _contact.GetContactUser()
+			if err.Status() {
 				_contact := contacts.Info{
 					Id:       _contactInfo.Id,
 					Nickname: _contactInfo.Nickname,
@@ -44,16 +44,16 @@ func actionGetList(list contacts.GetList, conn connect.Connector) {
 }
 
 func actionGetRequestList(list contacts.GetList, conn connect.Connector) {
-	_list := contacts.List{}
-	_list.List = make([]contacts.Info, 0)
+	_list := contacts.RequestList{}
+
 	selfUser, _ := conn2.Auth(conn.GetId())
 
-	userContacts := db.Model(&model.UserContactRequest{}).Find().Where("=", "user_id", selfUser.Id).All()
+	userContacts := db.Model(&model.UserContactRequest{}).Find().Where("=", "contact_id", selfUser.Id).All()
 
 	for _, contact := range userContacts {
 		if _contact, ok := contact.(model.UserContactRequest); ok {
-			_contactInfo, err := _contact.GetContactInfo()
-			if err.Empty() {
+			_contactInfo, err := _contact.GetUser()
+			if err.Status() {
 				_contact := contacts.Info{
 					Id:       _contactInfo.Id,
 					Nickname: _contactInfo.Nickname,
@@ -72,16 +72,15 @@ func actionGetRequestList(list contacts.GetList, conn connect.Connector) {
 }
 
 func actionGetBlackList(list contacts.GetList, conn connect.Connector) {
-	_list := contacts.List{}
-	_list.List = make([]contacts.Info, 0)
+	_list := contacts.Blacklist{}
 	selfUser, _ := conn2.Auth(conn.GetId())
 
 	userContactBlacks := db.Model(&model.UserContactBlack{}).Find().Where("=", "user_id", selfUser.Id).All()
 
 	for _, userContactBlack := range userContactBlacks {
 		if contactBlack, ok := userContactBlack.(model.UserContactBlack); ok {
-			user, err := contactBlack.GetContactInfo()
-			if err.Empty() {
+			user, err := contactBlack.GetContactUser()
+			if err.Status() {
 				_contact := contacts.Info{
 					Id:       user.Id,
 					Nickname: user.Nickname,

@@ -10,10 +10,10 @@ type UserContactBlack struct {
 	Remark     string
 }
 
-func (uc *UserContactBlack) GetUserInfo() (User, db.OrmError) {
+func (uc *UserContactBlack) GetUser() (User, db.OrmError) {
 	return GetUserById(uc.UserId)
 }
 
-func (uc *UserContactBlack) GetContactInfo() (User, db.OrmError) {
+func (uc *UserContactBlack) GetContactUser() (User, db.OrmError) {
 	return GetUserById(uc.ContactId)
 }

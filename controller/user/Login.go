@@ -35,7 +35,7 @@ func Login(login UserLogin.ForEmail, conn connect.Connector) {
 
 	userAccount := &model.UserAccount{}
 	ormErr = db.Model(userAccount).Find().Where(map[interface{}]interface{}{"account": login.Email}).One()
-	if ormErr.Empty() {
+	if !ormErr.Status() {
 		_ = conn.Send(UserLogin.Fail{Fail: trait.Fail{Message: "账户或密码不正确", Code: 6005}})
 		return
 	}
@@ -47,7 +47,7 @@ func Login(login UserLogin.ForEmail, conn connect.Connector) {
 	}
 
 	_user, err := model.GetUserById(userAccount.UserId)
-	if err.Empty() {
+	if !err.Status() {
 		_ = conn.Send(UserLogin.Fail{Fail: trait.Fail{Message: "账户或密码不正确", Code: 6005}})
 		return
 	}
@@ -58,7 +58,7 @@ func Login(login UserLogin.ForEmail, conn connect.Connector) {
 	token := fmt.Sprintf("%x", b)
 	userToken := &model.UserToken{UserId: _user.Id, Token: token, ExpireTime: uint64(time.Now().AddDate(0, 1, 0).Unix()), CreateTime: uint64(time.Now().Unix())}
 	ormErr = db.Model(userToken).Insert().Insert()
-	if ormErr.Empty() {
+	if !ormErr.Status() {
 		logger.Fatal("写入token失败", 0)
 	}
 	_ = conn.Send(UserLogin.Success{Token: token})

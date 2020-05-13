@@ -239,3 +239,7 @@ ALTER TABLE `user_contacts`
 -- 黑名单表增加备注字段 2020年5月11日09:59:17
 ALTER TABLE `user_contact_black`
     ADD COLUMN `remark` varchar(255) NOT NULL DEFAULT '' COMMENT '拉黑描述';
+
+-- 修正表名 2020年5月11日10:26:49
+ALTER TABLE `user_contact_black` RENAME `user_contact_blacks`;
+ALTER TABLE `user_contact_request` RENAME `user_contact_requests`;

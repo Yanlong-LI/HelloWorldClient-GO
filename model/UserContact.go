@@ -28,10 +28,10 @@ func UserContactAddUser(userId1, userId2 uint64) {
 	}
 }
 
-func (uc *UserContact) GetUserInfo() (User, db.OrmError) {
+func (uc *UserContact) GetUser() (User, db.OrmError) {
 	return GetUserById(uc.UserId)
 }
 
-func (uc *UserContact) GetContactInfo() (User, db.OrmError) {
+func (uc *UserContact) GetContactUser() (User, db.OrmError) {
 	return GetUserById(uc.ContactId)
 }

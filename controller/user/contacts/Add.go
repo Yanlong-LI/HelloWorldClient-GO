@@ -23,6 +23,12 @@ func addContact(_addContact contacts.AddContact, connector connect.Connector) {
 	var ormErr db.OrmError
 	_selfUser, _ := conn2.Auth(connector.GetId())
 
+	if _selfUser.Id == _addContact.Id {
+		_ = connector.Send(contacts.AddContactFail{
+			Fail: trait.Fail{Message: "不能添加自己"},
+		})
+	}
+
 	// 查询是否被对方拉黑
 	blackUser := &model.UserContactBlack{}
 	ormErr = db.Model(blackUser).Find().Where(map[interface{}]interface{}{"user_id": _addContact.Id, "contact_id": _selfUser.Id}).One()
@@ -76,9 +82,10 @@ func addContact(_addContact contacts.AddContact, connector connect.Connector) {
 	}
 
 	_ = connector.Send(contacts.AddContactSuccess{})
-	// 转换身份
-	_addContact.Id = _selfUser.Id
-	conn2.UserSendMessage(_addContact.Id, contacts.RequestAddContact{AddContact: _addContact})
+	// 通知目标有新的请求
+	conn2.UserSendMessage(_addContact.Id, contacts.RequestAddContact{
+		AddContact: contacts.AddContact{Id: _selfUser.Id, Remark: _addContact.Remark},
+	})
 }
 
 func acceptContact(_acceptContact contacts.AcceptContact, conn connect.Connector) {

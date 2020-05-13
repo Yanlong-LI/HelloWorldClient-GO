@@ -19,9 +19,9 @@ type SendTextMessage struct {
 }
 
 type SendMessageSuccess struct {
-	Id uint64
-	SendTextMessage
-	CreateTime uint64
+	Id           uint64
+	RandomString string
+	CreateTime   uint64
 }
 type SendMessageFail struct {
 	trait.Fail

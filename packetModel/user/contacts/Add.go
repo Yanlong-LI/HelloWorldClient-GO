@@ -27,12 +27,17 @@ func init() {
 }
 
 // 搜索账户
+//6519
 type SearchUser struct {
 	Account string //账户
 }
+
+//6521
 type SearchUserFail struct {
 	trait.Fail
 }
+
+//6520
 type SearchUserSuccess struct {
 	user.Info
 }
@@ -53,25 +58,39 @@ type AddContactFail struct {
 	trait.Fail
 }
 
-//接受
+// 接受
+// 6525
 type AcceptContact struct {
 	Id uint64
 }
+
+// 接受成功
+// 6526
 type AcceptContactSuccess struct {
 	trait.Success
 }
+
+// 接受失败
+// 6527
 type AcceptContactFail struct {
 	trait.Fail
 }
 
-//拒绝
+// 拒绝
+// 6528
 type RefuseContact struct {
 	Id     uint64
 	Remark string
 }
+
+// 拒绝成功
+// 6529
 type RefuseContactSuccess struct {
 	trait.Success
 }
+
+// 拒绝失败
+// 6530
 type RefuseContactFail struct {
 	trait.Fail
 }
@@ -90,7 +109,8 @@ type DeleteContactFail struct {
 
 // 拉黑
 type BlackContact struct {
-	Id uint64
+	Id     uint64
+	Remark string
 }
 type BlackContactSuccess struct {
 	trait.Success
@@ -111,17 +131,20 @@ type UnBlackContactFail struct {
 }
 
 //被接受
+//op:6543
 type AcceptedContact struct {
 	Id uint64 // 谁接受的发送谁的id
 }
 
 // 被拒绝
+//op:6544
 type RejectedContact struct {
 	Id     uint64 // 谁拒绝的发送谁的id
 	Remark string // 拒绝理由
 }
 
 // 添加联系人
+//op:6545
 type RequestAddContact struct {
 	AddContact
 }
