@@ -243,3 +243,11 @@ ALTER TABLE `user_contact_black`
 -- 修正表名 2020年5月11日10:26:49
 ALTER TABLE `user_contact_black` RENAME `user_contact_blacks`;
 ALTER TABLE `user_contact_request` RENAME `user_contact_requests`;
+
+-- 增加删除时间字段
+ALTER TABLE `channels`
+    ADD COLUMN `delete_time` bigint UNSIGNED NOT NULL DEFAULT 0 COMMENT '删除时间';
+
+ALTER TABLE `servers`
+    ADD COLUMN `delete_time` bigint unsigned NOT NULL DEFAULT 0 COMMENT '删除时间',
+    ADD COLUMN `status` tinyint unsigned NOT NULL DEFAULT 0 COMMENT '状态';

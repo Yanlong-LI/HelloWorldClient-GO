@@ -14,13 +14,14 @@ type Channel struct {
 	ParentId     uint64
 	UpdateTime   uint64
 	//Region       string
-	Describe string
+	Describe   string
+	DeleteTime uint64
 }
 
 func GetChannels() []interface{} {
-	return db.Model(&Channel{}).Find().Where("parent_id", 0).All()
+	return db.Model(&Channel{}).Find().Where("parent_id", 0).AndWhere("delete_time", 0).All()
 }
 
 func (cha *Channel) GetChildren() []interface{} {
-	return db.Model(&Channel{}).Find().Where("parent_id", cha.Id).All()
+	return db.Model(&Channel{}).Find().Where("parent_id", cha.Id).AndWhere("delete_time", 0).All()
 }
