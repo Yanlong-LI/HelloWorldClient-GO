@@ -7,4 +7,5 @@ type ChannelUser struct {
 	CreateTime uint64
 	UpdateTime uint64
 	OpenId     string
+	DeleteTime uint64
 }

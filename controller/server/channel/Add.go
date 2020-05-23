@@ -57,7 +57,7 @@ func actionAddChannel(addChannel channel.AddChannel, conn connect.Connector) {
 
 // 添加子频道
 func actionAddSubChannel(addChannel channel.AddSubChannel, conn connect.Connector) {
-
+	userInfo, _ := online.Auth(conn.GetId())
 	if len(strings.Trim(addChannel.Name, " 	")) == 0 {
 		_ = conn.Send(channel.AddSubChannelFail{Fail: trait.Fail{Message: "名称不能为空"}})
 		return
@@ -71,11 +71,16 @@ func actionAddSubChannel(addChannel channel.AddSubChannel, conn connect.Connecto
 		return
 	}
 
+	if _channel.OwnerUserId != userInfo.Id {
+		_ = conn.Send(channel.AddSubChannelFail{Fail: trait.Fail{Message: "您不是OW，没有权限"}})
+		return
+	}
+
 	// 创建频道
 	timeNow := uint64(time.Now().Unix())
-	userId, _ := online.Auth(conn.GetId())
+
 	newChannel := &model.Channel{Name: addChannel.Name, Avatar: addChannel.Avatar, CreateTime: timeNow,
-		UpdateTime: timeNow, CreateUserId: userId.Id, OwnerUserId: userId.Id, Status: 1, ParentId: addChannel.ChannelId, ServerId: 1,
+		UpdateTime: timeNow, CreateUserId: userInfo.Id, OwnerUserId: userInfo.Id, Status: 1, ParentId: addChannel.ChannelId, ServerId: 1,
 		Describe: addChannel.Describe,
 	}
 	err := db.Model(newChannel).Insert().Insert()
@@ -87,10 +92,10 @@ func actionAddSubChannel(addChannel channel.AddSubChannel, conn connect.Connecto
 	channelInfo := channel.Info{Id: newChannel.Id, Name: newChannel.Name, Avatar: newChannel.Avatar, CreateUser: struct {
 		Id       uint64
 		Nickname string
-	}{Id: userId.Id, Nickname: userId.Nickname}, Describe: newChannel.Describe, OwnerUser: struct {
+	}{Id: userInfo.Id, Nickname: userInfo.Nickname}, Describe: newChannel.Describe, OwnerUser: struct {
 		Id       uint64
 		Nickname string
-	}{Id: userId.Id, Nickname: userId.Nickname}, CreateTime: timeNow, Public: true, Verify: true, Commerce: true, Channels: make([]channel.Info, 0)}
+	}{Id: userInfo.Id, Nickname: userInfo.Nickname}, CreateTime: timeNow, Public: true, Verify: true, Commerce: true, Channels: make([]channel.Info, 0)}
 	// 返回当前频道信息
 	_ = conn.Send(channel.AddSubChannelSuccess{Channel: channelInfo, ChannelId: addChannel.ChannelId})
 }

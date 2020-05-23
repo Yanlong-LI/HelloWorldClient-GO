@@ -35,6 +35,7 @@ func actionDelChannel(delChannel channel.DelChannel, conn connect.Connector) {
 	//// 删除频道
 	//_, err = db.Model(_channel).Delete().Where("id", _channel.Id).Delete()
 	_channel.DeleteTime = uint64(time.Now().Unix())
+	_channel.UpdateTime = _channel.DeleteTime
 	_, err = db.Model(_channel).Update().Update()
 
 	if !err.Status() {

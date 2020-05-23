@@ -251,3 +251,8 @@ ALTER TABLE `channels`
 ALTER TABLE `servers`
     ADD COLUMN `delete_time` bigint unsigned NOT NULL DEFAULT 0 COMMENT '删除时间',
     ADD COLUMN `status` tinyint unsigned NOT NULL DEFAULT 0 COMMENT '状态';
+
+-- 修改用户离开频道为软删除，保持 open_id 唯一
+ALTER TABLE `channel_users`
+    MODIFY COLUMN `create_time` bigint(0) UNSIGNED NOT NULL DEFAULT 0 COMMENT '加入时间',
+    ADD COLUMN `delete_time` bigint UNSIGNED NOT NULL DEFAULT 0 COMMENT '删除时间';
