@@ -18,6 +18,12 @@ type Channel struct {
 	DeleteTime uint64
 }
 
+func getChannelById(channelId uint64) (Channel, db.OrmError) {
+	_channel := Channel{}
+	err := db.Model(&_channel).Find().Where("id", channelId).AndWhere("delete_time", 0).One()
+	return _channel, err
+}
+
 func GetChannels() []interface{} {
 	return db.Model(&Channel{}).Find().Where("parent_id", 0).AndWhere("delete_time", 0).All()
 }

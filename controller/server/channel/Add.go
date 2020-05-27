@@ -24,6 +24,9 @@ func actionAddChannel(addChannel channel.AddChannel, conn connect.Connector) {
 		return
 	}
 
+	_ = conn.Send(channel.AddChannelFail{Fail: trait.Fail{Message: "目前不开放主频道创建"}})
+	return
+
 	// 创建频道
 	timeNow := uint64(time.Now().Unix())
 	userId, _ := online.Auth(conn.GetId())
