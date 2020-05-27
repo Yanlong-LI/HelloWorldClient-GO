@@ -22,6 +22,7 @@ type Info struct {
 	Language string
 	Region   string
 	Remark   string
+	Online   bool
 }
 
 type GetInfoFail struct {

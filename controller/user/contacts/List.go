@@ -15,9 +15,11 @@ func init() {
 	route.Register(contacts.GetBlacklist{}, actionGetBlackList)
 }
 
+// 获取联系人列表
 func actionGetList(list contacts.GetList, conn connect.Connector) {
-	_list := contacts.List{}
-	_list.List = make([]contacts.Info, 0)
+	_list := contacts.RequestList{
+		List: make([]contacts.Info, 0),
+	}
 	selfUser, _ := conn2.Auth(conn.GetId())
 
 	userContacts := db.Model(&model.UserContact{}).Find().Where("=", "user_id", selfUser.Id).All()
@@ -33,6 +35,7 @@ func actionGetList(list contacts.GetList, conn connect.Connector) {
 					Language: _contactInfo.Language,
 					Region:   _contactInfo.Region,
 					Remark:   _contact.Remark,
+					Online:   conn2.UserOnlineByUserId(_contactInfo.Id),
 				}
 				_list.List = append(_list.List, _contact)
 			}
@@ -43,8 +46,11 @@ func actionGetList(list contacts.GetList, conn connect.Connector) {
 
 }
 
+// 获取请求列表
 func actionGetRequestList(list contacts.GetList, conn connect.Connector) {
-	_list := contacts.RequestList{}
+	_list := contacts.RequestList{
+		List: make([]contacts.Info, 0),
+	}
 
 	selfUser, _ := conn2.Auth(conn.GetId())
 
@@ -61,6 +67,7 @@ func actionGetRequestList(list contacts.GetList, conn connect.Connector) {
 					Language: _contactInfo.Language,
 					Region:   _contactInfo.Region,
 					Remark:   _contact.UserRemark,
+					Online:   conn2.UserOnlineByUserId(_contactInfo.Id),
 				}
 				_list.List = append(_list.List, _contact)
 			}
@@ -88,6 +95,7 @@ func actionGetBlackList(list contacts.GetList, conn connect.Connector) {
 					Language: user.Language,
 					Region:   user.Region,
 					Remark:   contactBlack.Remark,
+					Online:   false, // 给名单的用户保持离线状态返回
 				}
 				_list.List = append(_list.List, _contact)
 			}

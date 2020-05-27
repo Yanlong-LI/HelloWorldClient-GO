@@ -38,6 +38,12 @@ func init() {
 				_user := conUser[CId]
 				delete(conUser, CId)
 				delete(userCons[_user.Id], CId)
+
+				// 如果用户多端下线，销毁数据
+				if len(userCons) <= 0 {
+					delete(userCons, _user.Id)
+				}
+
 			case sendMessage := <-sendMessage:
 
 				if _userCons, ok := userCons[sendMessage.UserId]; ok {
@@ -77,6 +83,20 @@ func Auth(CId uint64) (user.Info, error) {
 		return _user, nil
 	}
 	return user.Info{}, errors.New("验证未通过")
+}
+
+/**
+用户是否在线
+*/
+func UserOnlineByUserId(UserId uint64) bool {
+
+	if c, ok := userCons[UserId]; ok {
+		if len(c) >= 1 {
+			return true
+		}
+	}
+	return false
+
 }
 
 func UserSendMessage(UserId uint64, Model interface{}) {

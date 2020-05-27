@@ -26,7 +26,7 @@ func searchUser(searchUser contacts.SearchUser, connector connect.Connector) {
 		_ = connector.Send(contacts.SearchUserFail{Fail: struct {
 			Code    uint32
 			Message string
-		}{Code: uint32(1), Message: "未搜索到账户"}})
+		}{Code: 1, Message: "未搜索到账户"}})
 		return
 	}
 	_user, err := _userAccountModel.GetUser()
@@ -34,7 +34,7 @@ func searchUser(searchUser contacts.SearchUser, connector connect.Connector) {
 		_ = connector.Send(contacts.SearchUserFail{Fail: struct {
 			Code    uint32
 			Message string
-		}{Code: uint32(1), Message: "搜索异常，用户数据丢失"}})
+		}{Code: 1, Message: "搜索异常，用户数据丢失"}})
 		return
 	}
 	_userInfo := user.Info{Id: _user.Id, Nickname: _user.Nickname, Avatar: _user.Avatar, Region: _user.Region, Language: _user.Language}

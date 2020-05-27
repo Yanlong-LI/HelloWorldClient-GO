@@ -16,8 +16,9 @@ func actionSearchChannelList(searchList channel.SearchChannelList, conn connect.
 
 	_list := db.Model(&model.Channel{}).Find().Where("like", "name", "%"+searchList.Name+"%").AndWhere("=", "parent_id", 0).AndWhere("=", "delete_time", 0).All()
 
-	list := channel.SearchChannelListSuccess{}
-	list.List = make([]channel.Info, 0)
+	list := channel.SearchChannelListSuccess{
+		List: make([]channel.Info, 0),
+	}
 	for _, cha := range _list {
 		if _cha, ok := cha.(model.Channel); ok {
 
