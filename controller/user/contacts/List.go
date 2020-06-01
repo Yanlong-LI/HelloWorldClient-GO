@@ -4,8 +4,8 @@ import (
 	"github.com/yanlong-li/HelloWorld-GO/io/db"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/connect"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/route"
+	"github.com/yanlong-li/HelloWorldServer/common"
 	"github.com/yanlong-li/HelloWorldServer/model"
-	conn2 "github.com/yanlong-li/HelloWorldServer/model/online"
 	"github.com/yanlong-li/HelloWorldServer/packetModel/user/contacts"
 )
 
@@ -17,10 +17,10 @@ func init() {
 
 // 获取联系人列表
 func actionGetList(list contacts.GetList, conn connect.Connector) {
-	_list := contacts.RequestList{
+	_list := contacts.List{
 		List: make([]contacts.Info, 0),
 	}
-	selfUser, _ := conn2.Auth(conn.GetId())
+	selfUser, _ := common.Auth(conn.GetId())
 
 	userContacts := db.Model(&model.UserContact{}).Find().Where("=", "user_id", selfUser.Id).All()
 
@@ -35,7 +35,7 @@ func actionGetList(list contacts.GetList, conn connect.Connector) {
 					Language: _contactInfo.Language,
 					Region:   _contactInfo.Region,
 					Remark:   _contact.Remark,
-					Online:   conn2.UserOnlineByUserId(_contactInfo.Id),
+					Online:   common.UserOnlineByUserId(_contactInfo.Id),
 				}
 				_list.List = append(_list.List, _contact)
 			}
@@ -52,7 +52,7 @@ func actionGetRequestList(list contacts.GetList, conn connect.Connector) {
 		List: make([]contacts.Info, 0),
 	}
 
-	selfUser, _ := conn2.Auth(conn.GetId())
+	selfUser, _ := common.Auth(conn.GetId())
 
 	userContacts := db.Model(&model.UserContactRequest{}).Find().Where("=", "contact_id", selfUser.Id).All()
 
@@ -67,7 +67,7 @@ func actionGetRequestList(list contacts.GetList, conn connect.Connector) {
 					Language: _contactInfo.Language,
 					Region:   _contactInfo.Region,
 					Remark:   _contact.UserRemark,
-					Online:   conn2.UserOnlineByUserId(_contactInfo.Id),
+					Online:   common.UserOnlineByUserId(_contactInfo.Id),
 				}
 				_list.List = append(_list.List, _contact)
 			}
@@ -80,7 +80,7 @@ func actionGetRequestList(list contacts.GetList, conn connect.Connector) {
 
 func actionGetBlackList(list contacts.GetList, conn connect.Connector) {
 	_list := contacts.Blacklist{}
-	selfUser, _ := conn2.Auth(conn.GetId())
+	selfUser, _ := common.Auth(conn.GetId())
 
 	userContactBlacks := db.Model(&model.UserContactBlack{}).Find().Where("=", "user_id", selfUser.Id).All()
 

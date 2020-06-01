@@ -1,4 +1,4 @@
-package online
+package common
 
 import (
 	"errors"
@@ -99,7 +99,8 @@ func UserOnlineByUserId(UserId uint64) bool {
 
 }
 
-func UserSendMessage(UserId uint64, Model interface{}) {
+// 对用户发送消息
+func SendMessageToUser(UserId uint64, Model interface{}) {
 	sendMessage <- struct {
 		UserId uint64
 		Model  interface{}

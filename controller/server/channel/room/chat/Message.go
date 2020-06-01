@@ -1,10 +1,14 @@
 package chat
 
 import (
+	"github.com/yanlong-li/HelloWorld-GO/io/db"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/connect"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/route"
-	conn2 "github.com/yanlong-li/HelloWorldServer/model/online"
+	"github.com/yanlong-li/HelloWorldServer/common"
+	"github.com/yanlong-li/HelloWorldServer/model"
+	"github.com/yanlong-li/HelloWorldServer/packetModel/server/channel"
 	"github.com/yanlong-li/HelloWorldServer/packetModel/server/channel/room/message"
+	"github.com/yanlong-li/HelloWorldServer/packetModel/trait"
 	"log"
 	"time"
 )
@@ -15,12 +19,24 @@ func init() {
 
 func TextMessage(msg message.SendTextMessage, conn connect.Connector) {
 
-	_user, err := conn2.Auth(conn.GetId())
+	_user, err := common.Auth(conn.GetId())
 	if err != nil {
 
 		log.Print("收到用户消息：获取用户错误")
 		return
 	}
+
+	var _channelUser = &model.ChannelUser{}
+	ormErr := db.Model(_channelUser).Find().Where(map[interface{}]interface{}{
+		"channel_id":  msg.ChannelId,
+		"user_id":     _user.Id,
+		"delete_time": 0,
+	}).One()
+	if ormErr.Empty() {
+		_ = conn.Send(channel.LeaveChannelFail{Fail: trait.Fail{Message: "您没有权限发送数据"}})
+		return
+	}
+
 	_msg := message.TextMessage{
 		SendTextMessage: msg,
 		Time:            uint64(time.Now().Unix()),
@@ -32,5 +48,5 @@ func TextMessage(msg message.SendTextMessage, conn connect.Connector) {
 
 	_ = conn.Send(message.SendTextMessageSuccess{TextMessage: _msg})
 
-	conn.Broadcast(_msg, false)
+	common.BroadcastToChannel(msg.ChannelId, _user.Id, _msg)
 }

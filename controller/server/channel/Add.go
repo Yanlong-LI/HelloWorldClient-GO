@@ -4,8 +4,8 @@ import (
 	"github.com/yanlong-li/HelloWorld-GO/io/db"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/connect"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/route"
+	"github.com/yanlong-li/HelloWorldServer/common"
 	"github.com/yanlong-li/HelloWorldServer/model"
-	"github.com/yanlong-li/HelloWorldServer/model/online"
 	"github.com/yanlong-li/HelloWorldServer/packetModel/server/channel"
 	"github.com/yanlong-li/HelloWorldServer/packetModel/trait"
 	"strings"
@@ -29,7 +29,7 @@ func actionAddChannel(addChannel channel.AddChannel, conn connect.Connector) {
 
 	// 创建频道
 	timeNow := uint64(time.Now().Unix())
-	userId, _ := online.Auth(conn.GetId())
+	userId, _ := common.Auth(conn.GetId())
 	newChannel := &model.Channel{Name: addChannel.Name, Avatar: addChannel.Avatar, CreateTime: timeNow,
 		UpdateTime: timeNow, CreateUserId: userId.Id, OwnerUserId: userId.Id, Status: 1, ParentId: 0, ServerId: 1,
 		Describe: addChannel.Describe,
@@ -60,7 +60,7 @@ func actionAddChannel(addChannel channel.AddChannel, conn connect.Connector) {
 
 // 添加子频道
 func actionAddSubChannel(addChannel channel.AddSubChannel, conn connect.Connector) {
-	userInfo, _ := online.Auth(conn.GetId())
+	userInfo, _ := common.Auth(conn.GetId())
 	if len(strings.Trim(addChannel.Name, " 	")) == 0 {
 		_ = conn.Send(channel.AddSubChannelFail{Fail: trait.Fail{Message: "名称不能为空"}})
 		return

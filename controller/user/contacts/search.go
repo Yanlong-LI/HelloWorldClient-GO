@@ -4,8 +4,8 @@ import (
 	"github.com/yanlong-li/HelloWorld-GO/io/db"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/connect"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/route"
+	"github.com/yanlong-li/HelloWorldServer/common"
 	"github.com/yanlong-li/HelloWorldServer/model"
-	"github.com/yanlong-li/HelloWorldServer/model/online"
 	"github.com/yanlong-li/HelloWorldServer/packetModel/user"
 	"github.com/yanlong-li/HelloWorldServer/packetModel/user/contacts"
 )
@@ -17,7 +17,7 @@ func init() {
 // 搜索账户
 func searchUser(searchUser contacts.SearchUser, connector connect.Connector) {
 
-	selfUser, _ := online.Auth(connector.GetId())
+	selfUser, _ := common.Auth(connector.GetId())
 
 	_userAccountModel := &model.UserAccount{}
 

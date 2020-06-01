@@ -4,8 +4,8 @@ import (
 	"github.com/yanlong-li/HelloWorld-GO/io/db"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/connect"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/route"
+	"github.com/yanlong-li/HelloWorldServer/common"
 	"github.com/yanlong-li/HelloWorldServer/model"
-	"github.com/yanlong-li/HelloWorldServer/model/online"
 	"github.com/yanlong-li/HelloWorldServer/packetModel/trait"
 	"github.com/yanlong-li/HelloWorldServer/packetModel/user/contacts/message"
 	"time"
@@ -17,7 +17,7 @@ func init() {
 
 func actionSendTextMessage(sendTextMessage message.SendTextMessage, conn connect.Connector) {
 
-	selfUser, _ := online.Auth(conn.GetId())
+	selfUser, _ := common.Auth(conn.GetId())
 	recvUserId := sendTextMessage.ContactId
 
 	uc := db.Model(&model.UserContact{}).Find().Where("user_id", selfUser.Id).AndWhere("contact_id", recvUserId).Exists()
@@ -33,6 +33,6 @@ func actionSendTextMessage(sendTextMessage message.SendTextMessage, conn connect
 	// 先发给自己发送成功提示
 	_ = conn.Send(message.SendMessageSuccess{RandomString: sendTextMessage.RandomString, Id: 0, CreateTime: uint64(time.Now().Unix())})
 	//发送给好友
-	online.UserSendMessage(recvUserId, message.RecvTextMessage{CreateTime: uint64(time.Now().Unix()), Id: 0, ContactId: selfUser.Id, Content: sendTextMessage.Content})
+	common.SendMessageToUser(recvUserId, message.RecvTextMessage{CreateTime: uint64(time.Now().Unix()), Id: 0, ContactId: selfUser.Id, Content: sendTextMessage.Content})
 
 }

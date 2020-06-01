@@ -4,8 +4,8 @@ import (
 	"github.com/yanlong-li/HelloWorld-GO/io/logger"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/connect"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/route"
+	"github.com/yanlong-li/HelloWorldServer/common"
 	"github.com/yanlong-li/HelloWorldServer/model"
-	"github.com/yanlong-li/HelloWorldServer/model/online"
 	"github.com/yanlong-li/HelloWorldServer/packetModel/server/channel"
 )
 
@@ -15,7 +15,7 @@ func init() {
 
 func actionGetChannelList(_ channel.GetList, conn connect.Connector) {
 
-	user, _ := online.Auth(conn.GetId())
+	user, _ := common.Auth(conn.GetId())
 
 	// model
 	_list := model.GetUserChannels(user.Id)

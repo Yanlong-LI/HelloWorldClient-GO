@@ -5,8 +5,8 @@ import (
 	"github.com/yanlong-li/HelloWorld-GO/io/logger"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/connect"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/route"
+	"github.com/yanlong-li/HelloWorldServer/common"
 	"github.com/yanlong-li/HelloWorldServer/model"
-	conn2 "github.com/yanlong-li/HelloWorldServer/model/online"
 	"github.com/yanlong-li/HelloWorldServer/packetModel/trait"
 	"github.com/yanlong-li/HelloWorldServer/packetModel/user/contacts"
 	"time"
@@ -21,7 +21,7 @@ func init() {
 func addContact(_addContact contacts.AddContact, connector connect.Connector) {
 
 	var ormErr db.OrmError
-	_selfUser, _ := conn2.Auth(connector.GetId())
+	_selfUser, _ := common.Auth(connector.GetId())
 
 	if _selfUser.Id == _addContact.Id {
 		_ = connector.Send(contacts.AddContactFail{
@@ -83,14 +83,14 @@ func addContact(_addContact contacts.AddContact, connector connect.Connector) {
 
 	_ = connector.Send(contacts.AddContactSuccess{})
 	// 通知目标有新的请求
-	conn2.UserSendMessage(_addContact.Id, contacts.RequestAddContact{
+	common.SendMessageToUser(_addContact.Id, contacts.RequestAddContact{
 		AddContact: contacts.AddContact{Id: _selfUser.Id, Remark: _addContact.Remark},
 	})
 }
 
 func acceptContact(_acceptContact contacts.AcceptContact, conn connect.Connector) {
 
-	selfUser, _ := conn2.Auth(conn.GetId())
+	selfUser, _ := common.Auth(conn.GetId())
 
 	ucr, ormErr := model.UserContactRequestFind(_acceptContact.Id, selfUser.Id)
 	if ormErr.Empty() {
@@ -111,11 +111,11 @@ func acceptContact(_acceptContact contacts.AcceptContact, conn connect.Connector
 	_ = conn.Send(contacts.AcceptContactSuccess{Success: trait.Success{}})
 
 	// 通知对方我已通过
-	conn2.UserSendMessage(_acceptContact.Id, contacts.AcceptedContact{Id: selfUser.Id})
+	common.SendMessageToUser(_acceptContact.Id, contacts.AcceptedContact{Id: selfUser.Id})
 
 }
 func refuseContact(_contact contacts.RefuseContact, conn connect.Connector) {
-	selfUser, _ := conn2.Auth(conn.GetId())
+	selfUser, _ := common.Auth(conn.GetId())
 
 	ucr, ormErr := model.UserContactRequestFind(_contact.Id, selfUser.Id)
 	if ormErr.Empty() {
@@ -133,5 +133,5 @@ func refuseContact(_contact contacts.RefuseContact, conn connect.Connector) {
 	_ = conn.Send(contacts.RefuseContactSuccess{Success: trait.Success{}})
 
 	// 通知对方我已通过
-	conn2.UserSendMessage(_contact.Id, contacts.RejectedContact{Id: selfUser.Id, Remark: _contact.Remark})
+	common.SendMessageToUser(_contact.Id, contacts.RejectedContact{Id: selfUser.Id, Remark: _contact.Remark})
 }

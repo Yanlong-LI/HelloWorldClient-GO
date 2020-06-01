@@ -7,8 +7,8 @@ import (
 	"github.com/yanlong-li/HelloWorld-GO/io/logger"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/connect"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/route"
+	"github.com/yanlong-li/HelloWorldServer/common"
 	"github.com/yanlong-li/HelloWorldServer/model"
-	conn2 "github.com/yanlong-li/HelloWorldServer/model/online"
 	"github.com/yanlong-li/HelloWorldServer/packetModel/trait"
 	"github.com/yanlong-li/HelloWorldServer/packetModel/user"
 	UserLogin "github.com/yanlong-li/HelloWorldServer/packetModel/user/Login"
@@ -52,7 +52,7 @@ func Login(login UserLogin.ForEmail, conn connect.Connector) {
 		return
 	}
 
-	conn2.SignIn(conn, user.Info{Id: _user.Id, Nickname: _user.Nickname, Avatar: _user.Avatar, Language: _user.Language, Region: _user.Region})
+	common.SignIn(conn, user.Info{Id: _user.Id, Nickname: _user.Nickname, Avatar: _user.Avatar, Language: _user.Language, Region: _user.Region})
 	b := make([]byte, 64)
 	_, _ = rand.Read(b)
 	token := fmt.Sprintf("%x", b)
@@ -66,7 +66,7 @@ func Login(login UserLogin.ForEmail, conn connect.Connector) {
 
 // 获取自身用户信息
 func GetUserInfo(info user.GetInfo, conn connect.Connector) {
-	_user, err := conn2.Auth(conn.GetId())
+	_user, err := common.Auth(conn.GetId())
 	if err != nil {
 		return
 	}
@@ -82,6 +82,6 @@ func actionResuming(resuming UserLogin.Resuming, conn connect.Connector) {
 		_ = conn.Send(UserLogin.ResumingFail{Fail: trait.Fail{Message: "Token无效"}})
 		return
 	}
-	conn2.SignIn(conn, user.Info{Id: _user.Id, Nickname: _user.Nickname, Language: _user.Language, Region: _user.Region})
+	common.SignIn(conn, user.Info{Id: _user.Id, Nickname: _user.Nickname, Language: _user.Language, Region: _user.Region})
 	_ = conn.Send(UserLogin.ResumingSuccess{})
 }

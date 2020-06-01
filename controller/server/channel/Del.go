@@ -4,8 +4,8 @@ import (
 	"github.com/yanlong-li/HelloWorld-GO/io/db"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/connect"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/route"
+	"github.com/yanlong-li/HelloWorldServer/common"
 	"github.com/yanlong-li/HelloWorldServer/model"
-	"github.com/yanlong-li/HelloWorldServer/model/online"
 	"github.com/yanlong-li/HelloWorldServer/packetModel/server/channel"
 	"github.com/yanlong-li/HelloWorldServer/packetModel/trait"
 	"time"
@@ -23,7 +23,7 @@ func actionDelChannel(delChannel channel.DelChannel, conn connect.Connector) {
 		_ = conn.Send(channel.DelChannelFail{Fail: trait.Fail{Message: err.Error()}})
 		return
 	}
-	user, _ := online.Auth(conn.GetId())
+	user, _ := common.Auth(conn.GetId())
 	if _channel.OwnerUserId != user.Id {
 		_ = conn.Send(channel.DelChannelFail{Fail: trait.Fail{Message: "您未拥有权限"}})
 		return

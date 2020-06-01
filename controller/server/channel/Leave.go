@@ -4,8 +4,8 @@ import (
 	"github.com/yanlong-li/HelloWorld-GO/io/db"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/connect"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/route"
+	"github.com/yanlong-li/HelloWorldServer/common"
 	"github.com/yanlong-li/HelloWorldServer/model"
-	"github.com/yanlong-li/HelloWorldServer/model/online"
 	"github.com/yanlong-li/HelloWorldServer/packetModel/server/channel"
 	"github.com/yanlong-li/HelloWorldServer/packetModel/trait"
 	"time"
@@ -16,12 +16,13 @@ func init() {
 }
 
 func actionLeaveChannel(leaveChannel channel.LeaveChannel, conn connect.Connector) {
-	user, _ := online.Auth(conn.GetId())
+	user, _ := common.Auth(conn.GetId())
 
 	var _channelUser = &model.ChannelUser{}
 	err := db.Model(_channelUser).Find().Where(map[interface{}]interface{}{
-		"channel_id": leaveChannel.Id,
-		"user_id":    user.Id,
+		"channel_id":  leaveChannel.Id,
+		"user_id":     user.Id,
+		"delete_time": 0,
 	}).One()
 	if err.Empty() {
 		_ = conn.Send(channel.LeaveChannelFail{Fail: trait.Fail{Message: "未查到数据"}})

@@ -6,7 +6,7 @@ import (
 	"github.com/yanlong-li/HelloWorld-GO/io/network/connect"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/route"
 	"github.com/yanlong-li/HelloWorld-GO/io/network/stream"
-	conn2 "github.com/yanlong-li/HelloWorldServer/model/online"
+	"github.com/yanlong-li/HelloWorldServer/common"
 	"github.com/yanlong-li/HelloWorldServer/packetModel"
 	"github.com/yanlong-li/HelloWorldServer/packetModel/gateway"
 	"github.com/yanlong-li/HelloWorldServer/packetModel/trait"
@@ -32,7 +32,7 @@ func init() {
 func Middleware(ps stream.Interface, conn connect.Connector) bool {
 	if _, ok := routingWhiteList[ps.GetOpCode()]; !ok {
 		// 验证用户是否登陆
-		_, err := conn2.Auth(conn.GetId())
+		_, err := common.Auth(conn.GetId())
 		if err != nil {
 			logger.Debug(fmt.Sprintf("拦截一个请求:%d", ps.GetOpCode()), 0)
 			_ = conn.Send(gateway.AuthenticFail{Fail: trait.Fail{Code: 7015, Message: "当前未登陆"}})
