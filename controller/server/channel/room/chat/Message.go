@@ -6,7 +6,6 @@ import (
 	"github.com/yanlong-li/HelloWorld-GO/io/network/route"
 	"github.com/yanlong-li/HelloWorldServer/common"
 	"github.com/yanlong-li/HelloWorldServer/model"
-	"github.com/yanlong-li/HelloWorldServer/packetModel/server/channel"
 	"github.com/yanlong-li/HelloWorldServer/packetModel/server/channel/room/message"
 	"github.com/yanlong-li/HelloWorldServer/packetModel/trait"
 	"log"
@@ -33,7 +32,7 @@ func TextMessage(msg message.SendTextMessage, conn connect.Connector) {
 		"delete_time": 0,
 	}).One()
 	if ormErr.Empty() {
-		_ = conn.Send(channel.LeaveChannelFail{Fail: trait.Fail{Message: "您没有权限发送数据"}})
+		_ = conn.Send(message.SendTextMessageFail{Fail: trait.Fail{Message: "您没有权限发送数据"}, ChannelId: msg.ChannelId, ServerId: msg.ServerId, RandomString: msg.RandomString})
 		return
 	}
 

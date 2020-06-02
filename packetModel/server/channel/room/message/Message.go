@@ -25,6 +25,9 @@ type SendTextMessageSuccess struct {
 }
 type SendTextMessageFail struct {
 	trait.Fail
+	ServerId     uint64
+	ChannelId    uint64
+	RandomString string
 }
 
 type TextMessage struct {
