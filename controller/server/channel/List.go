@@ -37,7 +37,7 @@ func actionGetChannelList(_ channel.GetList, conn connect.Connector) {
 			continue
 		}
 		createUser, _ := model.GetUserById(cha.CreateUserId)
-		ownerUser, _ := model.GetUserById(cha.CreateUserId)
+		ownerUser, _ := model.GetUserById(cha.OwnerUserId)
 		info := channel.Info{
 			Id:     cha.Id,
 			Name:   cha.Name,
@@ -60,7 +60,7 @@ func actionGetChannelList(_ channel.GetList, conn connect.Connector) {
 		for _, channelChildren := range ChannelChildrenS {
 			if _channelChildren, ok := channelChildren.(model.Channel); ok {
 				_createUser, _ := model.GetUserById(cha.CreateUserId)
-				_ownerUser, _ := model.GetUserById(cha.CreateUserId)
+				_ownerUser, _ := model.GetUserById(cha.OwnerUserId)
 				_channelInfo := channel.Info{
 					Id:     _channelChildren.Id,
 					Name:   _channelChildren.Name,

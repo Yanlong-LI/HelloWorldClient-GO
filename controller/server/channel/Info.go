@@ -17,7 +17,7 @@ func init() {
 			_ = conn.Send(channel.GetFail{Fail: trait.Fail{Message: "数据不存在"}})
 		} else {
 			createUser, _ := model.GetUserById(_cha.CreateUserId)
-			ownerUser, _ := model.GetUserById(_cha.CreateUserId)
+			ownerUser, _ := model.GetUserById(_cha.OwnerUserId)
 			info := channel.Info{
 				Id:     _cha.Id,
 				Name:   _cha.Name,
@@ -40,7 +40,7 @@ func init() {
 			for _, channelChildren := range ChannelChildrenS {
 				if _channelChildren, ok := channelChildren.(model.Channel); ok {
 					_createUser, _ := model.GetUserById(_cha.CreateUserId)
-					_ownerUser, _ := model.GetUserById(_cha.CreateUserId)
+					_ownerUser, _ := model.GetUserById(_cha.OwnerUserId)
 					_channelInfo := channel.Info{
 						Id:     _channelChildren.Id,
 						Name:   _channelChildren.Name,
