@@ -20,9 +20,7 @@ func actionGetChannelList(_ channel.GetList, conn connect.Connector) {
 	// model
 	_list := model.GetUserChannels(user.Id)
 	// packet
-	list := channel.List{
-		List: make([]channel.Info, 0),
-	}
+	list := channel.List{}
 	for _, cu := range _list {
 
 		_cu, ok := cu.(model.ChannelUser)
@@ -84,7 +82,7 @@ func actionGetChannelList(_ channel.GetList, conn connect.Connector) {
 
 		}
 
-		list.List = append(list.List, info)
+		list = append(list, info)
 	}
 
 	_ = conn.Send(list)

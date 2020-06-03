@@ -1,5 +1,3 @@
 package member
 
-type List struct {
-	List []Info
-}
+type List []Info

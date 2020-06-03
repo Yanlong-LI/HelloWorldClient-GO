@@ -25,13 +25,7 @@ func TextMessage(msg message.SendTextMessage, conn connect.Connector) {
 		return
 	}
 
-	var _channelUser = &model.ChannelUser{}
-	ormErr := db.Model(_channelUser).Find().Where(map[interface{}]interface{}{
-		"channel_id":  msg.ChannelId,
-		"user_id":     _user.Id,
-		"delete_time": 0,
-	}).One()
-	if ormErr.Empty() {
+	if !checkUserJoinChannel(_user.Id, msg.ChannelId) {
 		_ = conn.Send(message.SendTextMessageFail{Fail: trait.Fail{Message: "您没有权限发送数据"}, ChannelId: msg.ChannelId, ServerId: msg.ServerId, RandomString: msg.RandomString})
 		return
 	}
@@ -48,4 +42,34 @@ func TextMessage(msg message.SendTextMessage, conn connect.Connector) {
 	_ = conn.Send(message.SendTextMessageSuccess{TextMessage: _msg})
 
 	common.BroadcastToChannel(msg.ChannelId, _user.Id, _msg)
+}
+
+func checkUserJoinChannel(userId, channelId uint64) bool {
+	//先查频道是否存在
+	_channel := &model.Channel{}
+	ormErr := db.Model(_channel).Find().Where(map[interface{}]interface{}{
+		"id":          channelId,
+		"delete_time": 0,
+	}).One()
+
+	if !ormErr.Status() {
+		return false
+	}
+	// 再查是否在当前目录
+	_channelUser := &model.ChannelUser{}
+	ormErr = db.Model(_channelUser).Find().Where(map[interface{}]interface{}{
+		"channel_id":  channelId,
+		"user_id":     userId,
+		"delete_time": 0,
+	}).One()
+
+	if ormErr.Status() {
+		return true
+	}
+	// 查询父频道
+	if _channel.ParentId != 0 {
+		return checkUserJoinChannel(userId, _channel.ParentId)
+	}
+
+	return false
 }

@@ -11,12 +11,8 @@ func init() {
 
 type GetList struct {
 }
-type List struct {
-	List []Info
-}
+type List []Info
 type SearchChannelList struct {
 	Name string
 }
-type SearchChannelListSuccess struct {
-	List []Info
-}
+type SearchChannelListSuccess []Info

@@ -14,9 +14,7 @@ func init() {
 
 type GetJoinChannelList struct {
 }
-type JoinChannelList struct {
-	List []channel.Info
-}
+type JoinChannelList []channel.Info
 type GetJoinChannelListFail struct {
 	trait.Fail
 }

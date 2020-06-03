@@ -11,9 +11,7 @@ func init() {
 type GetProxyServerList struct {
 }
 
-type ProxyServerList struct {
-	List []ProxyServer
-}
+type ProxyServerList []ProxyServer
 
 type GetProxyInfo struct {
 	Id string

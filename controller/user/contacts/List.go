@@ -46,9 +46,7 @@ func actionGetList(list contacts.GetList, conn connect.Connector) {
 
 // 获取请求列表
 func actionGetRequestList(list contacts.GetList, conn connect.Connector) {
-	_list := contacts.RequestList{
-		List: make([]contacts.Info, 0),
-	}
+	_list := contacts.RequestList{}
 
 	selfUser, _ := common.Auth(conn.GetId())
 
@@ -67,7 +65,7 @@ func actionGetRequestList(list contacts.GetList, conn connect.Connector) {
 					Remark:   _contact.UserRemark,
 					Online:   common.UserOnlineByUserId(_contactInfo.Id),
 				}
-				_list.List = append(_list.List, _contact)
+				_list = append(_list, _contact)
 			}
 		}
 
@@ -95,7 +93,7 @@ func actionGetBlackList(list contacts.GetList, conn connect.Connector) {
 					Remark:   contactBlack.Remark,
 					Online:   false, // 给名单的用户保持离线状态返回
 				}
-				_list.List = append(_list.List, _contact)
+				_list = append(_list, _contact)
 			}
 		}
 

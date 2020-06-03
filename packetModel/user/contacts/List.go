@@ -34,9 +34,7 @@ type GetRequestList struct {
 }
 
 // 新朋友列表
-type RequestList struct {
-	List []Info
-}
+type RequestList []Info
 
 //获取新朋友列表失败
 type GetRequestListFail struct {
@@ -48,9 +46,8 @@ type GetBlacklist struct {
 }
 
 // 黑名单列表
-type Blacklist struct {
-	List []Info
-}
+type Blacklist []Info
+
 type GetBlacklistFail struct {
 	trait.Fail
 }
