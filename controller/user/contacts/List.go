@@ -17,9 +17,7 @@ func init() {
 
 // 获取联系人列表
 func actionGetList(list contacts.GetList, conn connect.Connector) {
-	_list := contacts.List{
-		List: make([]contacts.Info, 0),
-	}
+	var _list contacts.List = make([]contacts.Info, 0)
 	selfUser, _ := common.Auth(conn.GetId())
 
 	userContacts := db.Model(&model.UserContact{}).Find().Where("=", "user_id", selfUser.Id).All()
@@ -37,7 +35,7 @@ func actionGetList(list contacts.GetList, conn connect.Connector) {
 					Remark:   _contact.Remark,
 					Online:   common.UserOnlineByUserId(_contactInfo.Id),
 				}
-				_list.List = append(_list.List, _contact)
+				_list = append(_list, _contact)
 			}
 		}
 

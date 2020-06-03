@@ -9,6 +9,7 @@ type DelChannel struct {
 	Id uint64
 }
 type DelChannelSuccess struct {
+	trait.Success
 	Id uint64
 }
 type DelChannelFail struct {

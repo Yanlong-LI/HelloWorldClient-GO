@@ -19,9 +19,10 @@ type GetList struct {
 }
 
 //返回联系人列表
-type List struct {
-	List []Info
-}
+//type List struct {
+//	List []Info
+//}
+type List []Info
 
 // 获取联系人列表失败
 type GetListFail struct {
