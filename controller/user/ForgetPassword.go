@@ -1,10 +1,10 @@
 package user
 
 import (
-	"github.com/yanlong-li/HelloWorld-GO/io/network/connect"
-	"github.com/yanlong-li/HelloWorld-GO/io/network/route"
-	"github.com/yanlong-li/HelloWorldServer/packetModel/trait"
-	"github.com/yanlong-li/HelloWorldServer/packetModel/user/forgetPassword"
+	"github.com/yanlong-li/hi-go-server/packet_model/trait"
+	"github.com/yanlong-li/hi-go-server/packet_model/user/forgetPassword"
+	"github.com/yanlong-li/hi-go-socket/connect"
+	"github.com/yanlong-li/hi-go-socket/route"
 )
 
 func init() {

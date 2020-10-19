@@ -2,8 +2,8 @@ package common
 
 import (
 	"errors"
-	"github.com/yanlong-li/HelloWorld-GO/io/network/connect"
-	"github.com/yanlong-li/HelloWorldServer/packetModel/user"
+	"github.com/yanlong-li/hi-go-server/packet_model/user"
+	"github.com/yanlong-li/hi-go-socket/connect"
 )
 
 // 连接id->User

@@ -1,9 +1,5 @@
 package model
 
-import (
-	"github.com/yanlong-li/HelloWorld-GO/io/db"
-)
-
 type User struct {
 	Id         uint64
 	Nickname   string

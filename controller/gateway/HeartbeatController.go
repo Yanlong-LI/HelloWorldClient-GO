@@ -2,10 +2,9 @@ package gateway
 
 import (
 	"fmt"
-	"github.com/yanlong-li/HelloWorld-GO/io/logger"
-	"github.com/yanlong-li/HelloWorld-GO/io/network/connect"
-	"github.com/yanlong-li/HelloWorld-GO/io/network/route"
-	"github.com/yanlong-li/HelloWorldServer/packetModel/gateway"
+	"github.com/yanlong-li/hi-go-server/packet_model/gateway"
+	"github.com/yanlong-li/hi-go-socket/connect"
+	"github.com/yanlong-li/hi-go-socket/route"
 )
 
 func init() {

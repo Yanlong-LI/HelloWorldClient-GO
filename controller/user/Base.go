@@ -1,5 +1,5 @@
 package user
 
 import (
-	_ "github.com/yanlong-li/HelloWorldServer/controller/user/contacts"
+	_ "github.com/yanlong-li/hi-go-server/controller/user/contacts"
 )

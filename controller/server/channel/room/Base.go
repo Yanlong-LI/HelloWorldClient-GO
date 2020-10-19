@@ -1,5 +1,5 @@
 package room
 
 import (
-	_ "github.com/yanlong-li/HelloWorldServer/controller/server/channel/room/chat"
+	_ "github.com/yanlong-li/hi-go-server/controller/server/channel/room/chat"
 )

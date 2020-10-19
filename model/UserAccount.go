@@ -1,7 +1,5 @@
 package model
 
-import "github.com/yanlong-li/HelloWorld-GO/io/db"
-
 // 用户账户表
 type UserAccount struct {
 	Id         uint64

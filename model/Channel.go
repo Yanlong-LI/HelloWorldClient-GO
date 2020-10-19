@@ -1,7 +1,5 @@
 package model
 
-import "github.com/yanlong-li/HelloWorld-GO/io/db"
-
 type Channel struct {
 	Id           uint64
 	ServerId     uint64

@@ -1,9 +1,7 @@
 package common
 
 import (
-	"github.com/yanlong-li/HelloWorld-GO/io/db"
-	"github.com/yanlong-li/HelloWorld-GO/io/logger"
-	"github.com/yanlong-li/HelloWorldServer/model"
+	"github.com/yanlong-li/hi-go-server/model"
 )
 
 func BroadcastToChannel(channelId, userId uint64, message interface{}) {

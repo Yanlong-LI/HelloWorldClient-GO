@@ -1,12 +1,11 @@
 package channel
 
 import (
-	"github.com/yanlong-li/HelloWorld-GO/io/logger"
-	"github.com/yanlong-li/HelloWorld-GO/io/network/connect"
-	"github.com/yanlong-li/HelloWorld-GO/io/network/route"
-	"github.com/yanlong-li/HelloWorldServer/common"
-	"github.com/yanlong-li/HelloWorldServer/model"
-	"github.com/yanlong-li/HelloWorldServer/packetModel/server/channel"
+	"github.com/yanlong-li/hi-go-server/common"
+	"github.com/yanlong-li/hi-go-server/model"
+	"github.com/yanlong-li/hi-go-server/packet_model/server/channel"
+	"github.com/yanlong-li/hi-go-socket/connect"
+	"github.com/yanlong-li/hi-go-socket/route"
 )
 
 func init() {
