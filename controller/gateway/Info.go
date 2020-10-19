@@ -1,6 +1,7 @@
 package gateway
 
 import (
+	logger "github.com/yanlong-li/hi-go-logger"
 	"github.com/yanlong-li/hi-go-server/packet_model/gateway"
 	"github.com/yanlong-li/hi-go-socket/connect"
 	"github.com/yanlong-li/hi-go-socket/route"

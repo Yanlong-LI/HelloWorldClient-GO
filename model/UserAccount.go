@@ -1,5 +1,7 @@
 package model
 
+import db "github.com/yanlong-li/hi-go-orm"
+
 // 用户账户表
 type UserAccount struct {
 	Id         uint64

@@ -1,7 +1,7 @@
 package model
 
 import (
-	"github.com/yanlong-li/hi-go-socket/io/db"
+	db "github.com/yanlong-li/hi-go-orm"
 	"time"
 )
 

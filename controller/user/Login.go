@@ -3,6 +3,8 @@ package user
 import (
 	"crypto/rand"
 	"fmt"
+	logger "github.com/yanlong-li/hi-go-logger"
+	db "github.com/yanlong-li/hi-go-orm"
 	"github.com/yanlong-li/hi-go-server/common"
 	"github.com/yanlong-li/hi-go-server/model"
 	"github.com/yanlong-li/hi-go-server/packet_model/trait"

@@ -1,5 +1,7 @@
 package model
 
+import db "github.com/yanlong-li/hi-go-orm"
+
 type User struct {
 	Id         uint64
 	Nickname   string

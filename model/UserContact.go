@@ -1,6 +1,7 @@
 package model
 
 import (
+	db "github.com/yanlong-li/hi-go-orm"
 	"time"
 )
 

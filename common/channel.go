@@ -1,6 +1,8 @@
 package common
 
 import (
+	logger "github.com/yanlong-li/hi-go-logger"
+	db "github.com/yanlong-li/hi-go-orm"
 	"github.com/yanlong-li/hi-go-server/model"
 )
 

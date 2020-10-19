@@ -1,5 +1,7 @@
 package model
 
+import db "github.com/yanlong-li/hi-go-orm"
+
 type UserContactBlack struct {
 	Id         uint64
 	UserId     uint64

@@ -2,6 +2,7 @@ package main
 
 import (
 	_ "github.com/go-sql-driver/mysql" // import your used driver
+	db "github.com/yanlong-li/hi-go-orm"
 	_ "github.com/yanlong-li/hi-go-server/controller"
 	"github.com/yanlong-li/hi-go-socket/socket"
 	"github.com/yanlong-li/hi-go-socket/websocket"

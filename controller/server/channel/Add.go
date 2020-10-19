@@ -1,6 +1,7 @@
 package channel
 
 import (
+	db "github.com/yanlong-li/hi-go-orm"
 	"github.com/yanlong-li/hi-go-server/common"
 	"github.com/yanlong-li/hi-go-server/model"
 	"github.com/yanlong-li/hi-go-server/packet_model/server/channel"

@@ -1,5 +1,7 @@
 package model
 
+import db "github.com/yanlong-li/hi-go-orm"
+
 type ChannelUser struct {
 	Id         uint64
 	ChannelId  uint64
