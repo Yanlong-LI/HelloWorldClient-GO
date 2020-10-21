@@ -9,9 +9,9 @@ func init() {
 	packet.Register(6501, GetInfo{})
 	packet.Register(6502, Info{})
 	packet.Register(6503, GetInfoFail{})
-	packet.Register(6004, EditInfo{})
-	packet.Register(6005, EditSuccess{})
-	packet.Register(6006, EditFail{})
+	packet.Register(6504, EditInfo{})
+	packet.Register(6505, EditSuccess{})
+	packet.Register(6506, EditFail{})
 }
 
 //region 获取用户信息
