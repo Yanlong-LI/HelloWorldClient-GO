@@ -1,17 +1,30 @@
 package main
 
 import (
-	_ "github.com/go-sql-driver/mysql" // import your used driver
-	db "github.com/yanlong-li/hi-go-orm"
+	"fmt"
+	"github.com/yanlong-li/hi-go-gateway/common"
+	logger "github.com/yanlong-li/hi-go-logger"
 	_ "github.com/yanlong-li/hi-go-server/controller"
+	"github.com/yanlong-li/hi-go-socket/connect"
 	"github.com/yanlong-li/hi-go-socket/socket"
-	"github.com/yanlong-li/hi-go-socket/websocket"
+	"time"
 )
 
 func main() {
 
-	db.ConfigDb("mysql", "helloworld:helloworld@tcp(localhost:3306)/helloworld?charset=utf8")
+	logger.SetLevel(logger.ALL)
+	// 连接网关服务器
+	go socket.Client(common.GatewayAndServerGroup, "127.0.0.1:3000")
 
-	go websocket.Server(":3001")
-	socket.Server(":3000")
+	// 接受客户端连接
+	go socket.Server(common.ServerAndClientGroup, ":3002")
+	printCount()
+}
+
+func printCount() {
+
+	for {
+		fmt.Println(connect.Count())
+		time.Sleep(time.Second * 5)
+	}
 }

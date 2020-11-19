@@ -10,7 +10,7 @@
 
 目前支持基于 Socket 的通讯和基于 WebSocket ，并且基于 Socket 的通讯是包含客户端的，基于 WebSocket 的没有包含客户端，后期将逐步完善。
 
-如果你有好的意见或建议请通过 `issues` 提出，如果你想加入这个项目可以直接 `Fork` 并将改动 `new pull request`
+如果你有好地意见或建议请通过 `issues` 提出，如果你想加入这个项目可以直接 `Fork` 并将改动 `new pull request`
 
 ### 基础通讯架构
 
